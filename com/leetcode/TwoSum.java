@@ -64,4 +64,13 @@ public class TwoSum {
 		}
 		return result;
 	}
+	
+	public static void main(String[] args){
+		int[] numbers = {4,2,4,1,6,20,3,8};
+		int target = 10;
+		TwoSum tSum = new TwoSum();
+		int[] result = new int[2];
+		result = tSum.twoSumMap(numbers, target);
+		System.out.println(result[0]+"  "+result[1]);
+	}
 }
