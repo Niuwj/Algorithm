@@ -1,4 +1,6 @@
 package com.leetcode;
+
+import java.util.HashSet;
 /*
  * Given a linked list, determine if it has a cycle in it.
  * 快慢指针
@@ -31,7 +33,7 @@ Can you solve it without using extra space?
 	public ListNode detectCycle(ListNode head) {
 		if(head == null){
         	return null;
-        }
+        }		
 		ListNode p = head;
         ListNode q = head;
         int loop = 0;
@@ -66,4 +68,18 @@ Can you solve it without using extra space?
             return p;
         } 
     }
+	//用哈希表存储节点地址
+	public ListNode detectC( ListNode head){
+		HashSet<ListNode> nodes = new HashSet<ListNode>();
+	    ListNode current = head;
+
+	    while(current != null){
+	        if(nodes.contains(current))
+	            return current;
+	        nodes.add(current);
+	        current = current.next;
+	    }
+
+	    return null;
+	}
 }

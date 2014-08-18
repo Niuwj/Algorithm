@@ -11,7 +11,7 @@ public class Main {
 		ListNode x3 = new ListNode(4);
 		l1.next = x2;
 		x2.next = l1;
-		//x3.next = x2;
+		x3.next = x2;
 		
 		ListNode l2 = new ListNode(0);
 		ListNode y2 = new ListNode(6);
@@ -29,8 +29,8 @@ public class Main {
 		boolean hc = llc.hasCycle(l1);		
 		System.out.println(hc);
 		ListNode p = llc.detectCycle(l1);
-		//System.out.println(p.val);
+		System.out.println(p.val);
+		System.out.println(llc.detectC(l1).val);
 		
 	}
-
 }
