@@ -4,12 +4,8 @@ package com.leetcode;
  */
 public class SortList {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
+	public ListNode sortList(ListNode head) {
+        
+    }
 	
 }
