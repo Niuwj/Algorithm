@@ -4,6 +4,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
+import javax.print.attribute.standard.MediaSize.Engineering;
+
 
 public class ListOpetation {
 	
@@ -174,4 +176,74 @@ ps：java的PriorityQueue就是一种堆heap结构
         
         return head.next;        
     }
+	/*
+	 * Sort a linked list in O(n log n) time using constant space complexity.
+	 * 
+	 * 归并排序的基本思想是：找到链表的middle节点，然后递归对前半部分和后半部分分别进行归并排序，最后对两个以排好序的链表进行Merge。
+	 * 
+	 */
+	public ListNode sortList(ListNode head) {
+		if(head==null || head.next==null){
+			return head;
+		}
+		
+		//计算出总数
+		int len = 0;
+		ListNode q = head;
+		while( q!=null ){
+			len++;
+			q = q.next;
+		}
+		
+		//分为两部分
+		int mid = len/2;
+		ListNode p = new ListNode(-1);
+		p.next = head;
+		ListNode d1 = head;
+		ListNode d2 = null;
+		while( mid!=0 ){
+			mid--;
+			p = p.next;
+		}
+		d2 = p.next;
+		p.next = null;
+		
+		//递归归并d1,p
+		d1 = sortList(d1);
+		d2 = sortList(d2);
+		
+		//合并两个有序链表
+		ListNode result = mergeSort(d1,d2);
+		return result;
+    }
+	public ListNode mergeSort(ListNode l1, ListNode l2){
+		if(l1 == null){
+        	return l2;
+        }else if(l2 == null){
+        	return l1;
+        }
+		
+		ListNode pre = new ListNode(-1);
+		ListNode end = pre;
+		
+		while(l1!=null && l2!=null){
+			if(l1.val<l2.val){
+				end.next = l1;
+				l1 = l1.next;
+			}else {
+				end.next = l2;
+				l2 = l2.next;
+			}
+			end = end.next;
+			end.next = null;
+		}
+		
+		if(l1!=null){
+			end.next = l1;
+		}
+		if(l2!=null){
+			end.next = l2;
+		}
+		return pre.next;
+	}
 }
