@@ -158,7 +158,7 @@ ps：java的PriorityQueue就是一种堆heap结构
         	}
         };
         
-        PriorityQueue<ListNode> heap = new PriorityQueue<>(size, mycmp);
+        PriorityQueue<ListNode> heap = new PriorityQueue<ListNode>(size, mycmp);
         
         for(ListNode n:lists){
         	if(n!=null){
@@ -246,4 +246,6 @@ ps：java的PriorityQueue就是一种堆heap结构
 		}
 		return pre.next;
 	}
+	
+	
 }
