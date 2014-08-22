@@ -247,5 +247,69 @@ ps：java的PriorityQueue就是一种堆heap结构
 		return pre.next;
 	}
 	
+	//Given a sorted linked list, delete all duplicates such that each element appear only once.
+	public ListNode deleteDuplicates(ListNode head) {
+        if(head==null || head.next == null){
+        	return head;
+        }
+        
+        //p找到一个节点，q找到第一个与该节点值不相等的节点
+        ListNode p = head;
+        ListNode q = head.next;
+        
+        while(q!=null){
+        	if( p.val == q.val){
+        		q = q.next;
+        	}else {
+				p.next = q;
+				q = q.next;
+				p = p.next;
+			}       	
+        }
+        if(q==null){
+			p.next = null;
+		}
+        
+        return head;        
+    }
+	
+	//Given a sorted linked list, delete all nodes that have duplicate numbers, 
+	//leaving only distinct numbers from the original list.
+	public ListNode deleteDuplicates2(ListNode head) {
+        if(head==null || head.next==null){
+        	return head;
+        }
+        //有可能会删除第一个节点，所以head需要先保护起来     
+        ListNode pre = new ListNode(-1);
+        pre.next =head;        
+        ListNode p = head;
+        head = pre;
+        while(p.next!=null){
+        	boolean flag = false;        	       	
+        	
+        	while(p.next!=null && p.val==p.next.val ){
+        		flag = true;
+        		p = p.next;
+        	}        	
+        	if(flag){
+        		pre.next = p.next;
+        		p = p.next;
+        	}else {
+				pre = p;
+				p = p.next;
+			}
+        	if(p==null){
+    			return head.next;
+    		}
+        }
+        return head.next;
+    }
+	
+	
+	//Given a singly linked list where elements are sorted in ascending order, 
+	//convert it to a height balanced BST.
+	public TreeNode sortedListToBST(ListNode head) {
+        
+    }
 	
 }
