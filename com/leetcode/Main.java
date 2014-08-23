@@ -6,6 +6,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		ListNode result;
 		ListNode l1 = new ListNode(2);
 		ListNode x2 = new ListNode(3);
 		ListNode x3 = new ListNode(4);
@@ -20,7 +21,7 @@ public class Main {
 		l2.next = y2;
 		y2.next =y3;
 		y3.next = y4;
-		ListNode result;
+
 //		//result = AddTwoNumbers.addTwoNumbers(l1,l2);
 //		MergeTwoSortedList mts = new MergeTwoSortedList();
 //		//result = = mts.mergeTwoLists(l1, l2);
@@ -34,7 +35,9 @@ public class Main {
 		ListOpetation lo = new ListOpetation();
 //		ListNode result = lo.insertionSortList(l2);
 //		result.print();
-		result = lo.partition(l2, 6);
+//		result = lo.partition(l2, 6);
+		l2.print();
+		result = lo.reverseList(l2);
 		result.print();
 		
 	}

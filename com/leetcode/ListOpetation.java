@@ -417,6 +417,25 @@ return 1->2->2->4->3->5.
         ltail.next= great.next;
         return less.next;        
     }
-
+	
+	//反转/逆置单链表
+	public ListNode reverseList(ListNode head){
+		//result是逆置后的头结点
+		ListNode result = null;
+		//p指向当前节点，pre指向当前节点的前驱
+		ListNode p = head;
+		ListNode pre = null;
+		while(p!=null){
+			ListNode next = p.next;
+			if(next==null){
+				result = p;
+			}
+			p.next = pre;
+			pre = p;
+			p = next;
+					
+		}
+		return result;
+	}
 
 }
