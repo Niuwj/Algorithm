@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import javax.print.attribute.standard.MediaSize.Engineering;
+import sun.net.www.content.image.png;
 
 
 public class ListOpetation {
@@ -308,8 +308,115 @@ ps：java的PriorityQueue就是一种堆heap结构
 	
 	//Given a singly linked list where elements are sorted in ascending order, 
 	//convert it to a height balanced BST.
+	//解法：这题的关键是能找出当前链表的中间节点，然后再递归左右的子链表，开始的时候程序先计算链表总长，然后传入两个前后索引指针，最后每次递归找出中间节点即可
 	public TreeNode sortedListToBST(ListNode head) {
-        
+        if(head==null){
+			return null;
+		}
+		ListNode p = head;
+		int len = 0;
+		while(p!=null){
+			len++;
+			p = p.next;
+		}
+		TreeNode root = l2bst(head,1,len);
+		return root;
     }
 	
+	public TreeNode l2bst(ListNode head, int st, int ed){
+		if(st>ed){
+			return null;
+		}
+		int mid = (st+ed)/2;
+		ListNode m = head;
+		for(int i=st;i<mid;i++){
+			m = m.next;
+		}
+		TreeNode parent = new TreeNode(m.val);
+		if(st!=ed){
+			TreeNode lt = l2bst(head, st, mid-1);
+			TreeNode rt = l2bst(m.next,mid+1 ,ed);			
+			parent.left = lt;
+			parent.right = rt;
+		}
+		return parent;
+	}
+	
+	//Sort a linked list using insertion sort.
+	public ListNode insertionSortList(ListNode head) {
+        if(head==null){
+        	return head;
+        }
+        
+        ListNode p = new ListNode(-1);
+        p.next = head;
+        //避免头结点的特殊情况
+        head = p;
+        //p是待插入点的前驱，从头到尾走一遍链表
+        ListNode q;
+        while(p.next!=null){
+        	
+        	//q找插入位置
+        	q = head;
+        	//flag用来标识是p是否移动，如果找到插入点并插入，p不动；否则q后移
+        	boolean flag = false;
+        	while(q!=p){
+        		if(q.next.val > p.next.val){
+        			ListNode temp = p.next;
+        			p.next = p.next.next;
+        			temp.next = q.next;
+        			q.next = temp;
+        			flag = true;
+        			break;
+        		}else {
+					q = q.next;
+				}
+        	}
+        	if(!flag){
+        		p = p.next;
+        	}
+        }
+        return head.next;
+    }
+	
+	/*Given a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
+You should preserve the original relative order of the nodes in each of the two partitions.
+For example,
+Given 1->4->3->2->5->2 and x = 3,
+return 1->2->2->4->3->5.
+*/
+	
+	public ListNode partition(ListNode head, int x) {
+        if(head == null || head.next == null){
+        	return head;
+        }
+        
+        //两个指针，一个less指向的是小于x的,ltail指向链尾，另一个great指向的是大于x的，gtail指向链尾
+        ListNode p = new ListNode(0);
+        p.next = head;
+        
+        ListNode less = new ListNode(-1);
+        ListNode ltail = less;
+        ListNode great = new ListNode(-1);
+        ListNode gtail = great;
+        while(p.next!=null){
+        	ListNode tmp = p.next;
+        	p.next = p.next.next;
+    		tmp.next = null;        	
+        	if(tmp.val<x){
+        		ltail.next = tmp;
+        		ltail = ltail.next; 
+        	}else {
+				gtail.next = tmp;
+				gtail = gtail.next;
+			}
+        }
+        if(less.next==null){
+        	return great.next;
+        }
+        ltail.next= great.next;
+        return less.next;        
+    }
+
+
 }
