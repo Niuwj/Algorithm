@@ -432,10 +432,74 @@ return 1->2->2->4->3->5.
 			}
 			p.next = pre;
 			pre = p;
-			p = next;
-					
+			p = next;					
 		}
 		return result;
 	}
-
+	
+	/*Reverse a linked list from position m to n. Do it in-place and in one-pass.
+For example:
+Given 1->2->3->4->5->NULL, m = 2 and n = 4,
+return 1->4->3->2->5->NULL.
+Note:
+Given m, n satisfy the following condition:
+1 ≤ m ≤ n ≤ length of list.*/
+	
+	public ListNode reverseBetween(ListNode head, int m, int n) {
+        //找到第m个节点pm的前驱prem，pn指向第n个节点
+		if(m==n){
+            return head;
+        }
+		//ph保护头结点，如果m==1，头结点将指向pn
+        ListNode ph = new ListNode(-1);
+		ph.next = head;
+		ListNode prem = new ListNode(-2);
+		prem.next = head;
+		ListNode pm=null,pn=null;
+		//指针p遍历链表
+		ListNode p = new ListNode(-3);
+		p.next = head;
+		int count = 0;
+		while(p!=null){
+			//找到pm后继续找pn
+			if(count==m-1){
+				prem = p;
+			}
+			//找到pn后跳出
+			if(count==n){
+				pn = p;
+				break;
+			}
+			p = p.next;
+			count++;
+		}
+		
+		pm = prem.next;
+		
+		//p在此指向pn的next
+		p = pn.next;
+		
+		//reverse从pm到pn的节点
+		
+		//p指向当前节点，pre指向当前节点的前驱
+		ListNode rp = pm;
+		//此处pre初始化为p，即pn的next，这样链表的m之后的就连起来了，相当于在反转后pm的next即指向了p		
+		ListNode pre = p;
+		while(rp!=p){
+			ListNode next = rp.next;
+			rp.next = pre;
+			if(next == p){
+			    break;
+			}
+			pre = rp;
+			rp = next;	
+		}
+		prem.next = rp;
+		//pm.next = p;
+		if(m==1){
+			ph.next = pn;
+		}
+		return ph.next;
+    }
+	
 }
