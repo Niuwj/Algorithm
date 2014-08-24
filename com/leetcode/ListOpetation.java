@@ -4,7 +4,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import sun.net.www.content.image.png;
 
 
 public class ListOpetation {
@@ -502,4 +501,8 @@ Given m, n satisfy the following condition:
 		return ph.next;
     }
 	
+	//k个节点一组，逆序
+	public ListNode reverseKGroup(ListNode head, int k) {
+        return reverseBetween(head,1,k);
+    }
 }
