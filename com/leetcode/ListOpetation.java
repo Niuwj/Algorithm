@@ -503,6 +503,37 @@ Given m, n satisfy the following condition:
 	
 	//k个节点一组，逆序
 	public ListNode reverseKGroup(ListNode head, int k) {
-        return reverseBetween(head,1,k);
+        if(head==null){
+        	return null;
+        }
+        ListNode p = new ListNode(-1);
+        p.next = head;
+        head = p;
+    	ListNode q = p;
+        while(true){
+            int i = 0;
+        	while(q!=null && i<k){
+        		q = q.next;
+        		i++;
+        	}
+        	
+        	if(q==null){
+        		return head.next;
+        	}else {        		
+				//循环左移
+				while(p.next!=q){
+					ListNode pnext,qnext;
+					pnext = p.next;
+					qnext = q.next;
+					p.next = p.next.next;
+					q.next = pnext;
+					pnext.next = qnext;					
+				}
+			}
+        	for(int j=0; j<k; j++){
+        		p = p.next;
+        	}
+        	q = p;
+        }
     }
 }

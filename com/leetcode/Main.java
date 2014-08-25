@@ -34,16 +34,23 @@ public class Main {
 //		ListNode p = llc.detectCycle(l1);
 //		System.out.println(p.val);
 //		System.out.println(llc.detectC(l1).val);
-		ListOpetation lo = new ListOpetation();
+//		ListOpetation lo = new ListOpetation();
 //		ListNode result = lo.insertionSortList(l2);
 //		result.print();
 //		result = lo.partition(l2, 6);
-		l2.print();
+//		l2.print();
 //		result = lo.reverseList(l2);
-		result = lo.reverseBetween(l2, 2, 5);
-		result.print();
+//		result = lo.reverseBetween(l2, 2, 5);
+//		result.print();
 //		ReverseInt rInt = new ReverseInt();
 //		System.out.println(rInt.reverse(100003));
 		
+		
+		LRUCache lru = new LRUCache(1);
+		lru.set(2, 1);
+		System.out.println(lru.get(2));
+		lru.set(3, 2);
+		System.out.println(lru.get(2));
+		System.out.println(lru.get(3));
 	}
 }
