@@ -55,5 +55,8 @@ public class Main {
 //		System.out.println(lru.get(3));
 		String s = new String("21");
 		int x = Integer.parseInt(s);
+		int i = -1;
+		
+		System.out.println(~0);
 	}
 }
