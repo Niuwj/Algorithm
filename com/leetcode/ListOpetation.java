@@ -536,4 +536,55 @@ Given m, n satisfy the following condition:
         	q = p;
         }
     }
+	
+	/*
+	 * Given a singly linked list L: L0→L1→…→Ln-1→Ln,
+reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
+
+You must do this in-place without altering the nodes' values.
+	 */
+	//算法：1.用快慢指针找到中间节点mid；2，将mid之后的链表逆序；3.合并前后两个链表
+	public void reorderList(ListNode head) {
+		
+		if(head ==null || head.next==null || head.next.next==null){
+        	return;
+        }
+        
+        //1.找到中间节点mid，快慢指针
+        ListNode p = head;
+        ListNode quick = head;
+        while(quick.next!=null&&quick.next.next!=null){
+        	quick = quick.next.next;
+        	p = p.next;
+        }
+        
+        //此时p指向的是中间节点
+        //2逆序p之后的链表
+        quick = p.next;
+        p.next = null;
+        //System.out.println(quick.val);
+        ListNode pre = null;
+        while(quick!=null){
+        	ListNode next = quick.next;
+        	if(next ==null){
+        		quick.next = pre;
+        		break;
+        	}
+        	quick.next = pre;
+        	pre = quick;
+        	quick = next;
+        }
+        //quick.print();
+        //此时quick指向的是逆序后的后半部分链表
+        //3.合并head和quick
+        
+        p = head;
+        while(p!=null && quick!=null){
+        	ListNode next = quick.next;
+        	quick.next = p.next;
+        	p.next = quick;
+        	quick = next;
+        	p = p.next.next;
+        }        
+    }
 }
