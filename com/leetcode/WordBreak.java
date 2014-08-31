@@ -84,7 +84,7 @@ A solution is ["cats and dog", "cat sand dog"].
 		if(flag == false){
 			return res;
 		}
-		LinkedList<Integer> sp = new LinkedList<>();
+		LinkedList<Integer> sp = new LinkedList<Integer>();
 		dfs(s, 0, sp, res, dict, dp);
 		return res;
 		
@@ -116,7 +116,7 @@ A solution is ["cats and dog", "cat sand dog"].
 	
 	public static void main(String[] args){
 		WordBreak wBreak = new WordBreak();
-		Set<String> dict = new HashSet<>();
+		Set<String> dict = new HashSet<String>();
 		dict.add("aaaa");
 		dict.add("aaa");
 //		dict.add("b");
