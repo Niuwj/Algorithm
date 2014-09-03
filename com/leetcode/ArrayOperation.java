@@ -1,4 +1,3 @@
-
 package com.leetcode;
 
 
@@ -73,8 +72,134 @@ You are given a target value to search. If found in the array return its index, 
 
 You may assume no duplicate exists in the array.
 	 */
+	//分析：二分查找，难度主要在于左右边界的确定
+	//时间复杂度：o(logn),空间复杂度：o（1）
 	public int search(int[] A, int target) {
-        
+		int len = A.length;
+        int low = 0;
+        int high = len-1;
+        int mid;
+        while(low<=high){
+        	mid = (low+high)/2;
+        	if(A[mid]==target){
+        		return mid;
+        	}
+        	if(A[low]>A[mid]){
+        		if(A[mid]<target && target<=A[high]){
+        			low = mid + 1;
+        		}else {
+					high = mid - 1;
+				}
+        	}else {
+				if(A[low]<=target && target<A[mid]){
+					high = mid - 1;
+				}else {
+					low = mid + 1;
+				}
+			}
+        }
+        return -1;        
     }
+	
+	/*
+	 * Search in Rotated Sorted Array II 
+	 * Follow up for "Search in Rotated Sorted Array":
+What if duplicates are allowed?
+
+Would this affect the run-time complexity? How and why?
+
+Write a function to determine if a given target is in the array.
+	 */
+	//分析：单独处理A[low]==A[mid]的情况，让low指针向后移
+	public boolean search2(int[] A, int target) {
+		int len = A.length;
+        int low = 0;
+        int high = len-1;
+        int mid;
+        while(low<=high){
+        	mid = (low+high)/2;
+        	if(A[mid]==target){
+        		return true;
+        	}
+        	if(A[low]==A[mid]){
+        	    low++;
+        	}else if(A[low]>A[mid]){
+        		if(A[mid]<target && target<=A[high]){
+        			low = mid + 1;
+        		}else {
+					high = mid - 1;
+				}
+        	}else {
+				if(A[low]<=target && target<A[mid]){
+					high = mid - 1;
+				}else {
+					low = mid + 1;
+				}
+			}
+        }
+        return false; 
+    }
+	
+	
+	/*
+	 * Remove Duplicates from Sorted Array
+	 * Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.
+
+Do not allocate extra space for another array, you must do this in place with constant memory.
+
+For example,
+Given input array A = [1,1,2],
+
+Your function should return length = 2, and A is now [1,2].
+	 */
+	//分析：用后边的数覆盖前边重复的数值
+	public int removeDuplicates(int[] A) {
+        int len = A.length;
+        if(len==0){
+            return 0;
+        }
+        int index = 0;
+        for(int i=1; i<len; i++){
+            if(A[index]!=A[i]){
+                A[++index] = A[i];
+            }
+        }
+        return index+1;
+    }
+	
+	/*
+	 * Remove Duplicates from Sorted Array II 
+	 * Follow up for "Remove Duplicates":
+What if duplicates are allowed at most twice?
+
+For example,
+Given sorted array A = [1,1,1,2,2,3],
+
+Your function should return length = 5, and A is now [1,1,2,2,3].
+	 */
+	//分析：添加计数的变量
+	public int removeDuplicates2(int[] A) {
+        int len = A.length;
+        if(len==0){
+            return 0;
+        }
+        int index = 0;
+        int count = 1;
+        for(int i=1; i<len; i++){
+        	if(A[index] == A[i]){
+        		if(count<2){
+                    A[++index] = A[i];
+                    count++;
+                }
+        	}else{
+        		A[++index] = A[i];
+                count = 1;
+            }
+        }
+        return index+1;
+    }
+	
+	
+	
 	
 }

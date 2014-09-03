@@ -1,5 +1,8 @@
 package com.leetcode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * There are two sorted arrays A and B of size m and n respectively. 
   * Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).
@@ -68,7 +71,56 @@ public class MedianOfTwoSortedArray {
 	        else
 	            return a[s1 + midA - 1];
 	    }
-	
+	/*
+	 * Longest Consecutive Sequence 
+	 * Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
+
+For example,
+Given [100, 4, 200, 1, 3, 2],
+The longest consecutive elements sequence is [1, 2, 3, 4]. Return its length: 4.
+
+Your algorithm should run in O(n) complexity.
+
+分析：找出集合中最长连续数字序列
+如果排序的话，时间复杂度是O(nlogn)
+只能牺牲空间复杂度：用hashmap，查询O(1)
+每扫描一个数字，看+1，-1是否在hashmap中
+	 */
+	 public int longestConsecutive(int[] num) {
+		 int len = num.length;
+		 if(len==0){
+			 return 0;
+		 }
+		 int i;
+		 Map<Integer, Boolean> map = new HashMap<Integer, Boolean>();
+		 for(i=0; i<len; i++){
+			 map.put(num[i], false);
+		 }
+		 
+		 int longest = 0;
+		 i = 0; 
+		 while(i<len){			 
+			 int l = 1;			 
+			 map.remove(num[i]);
+			 int tmp = num[i]+1;
+			 while(map.containsKey(tmp)){				 
+				 map.remove(tmp);
+				 l++;
+				 tmp++;
+			 }
+			 tmp = num[i]-1;
+			 while(map.containsKey(tmp)){
+				 map.remove(tmp);
+				 l++;
+				 tmp--;
+			 }
+			 if(l>longest){
+				 longest = l;
+			 }
+			 i++;
+		 }
+		 return longest;
+	 }
 	
 	
 }
