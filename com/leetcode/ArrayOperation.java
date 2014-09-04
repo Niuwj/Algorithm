@@ -1,5 +1,9 @@
 package com.leetcode;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 
 //对数组的一些操作
 public class ArrayOperation {
@@ -200,6 +204,158 @@ Your function should return length = 5, and A is now [1,1,2,2,3].
     }
 	
 	
+	public List<List<Integer>> threeSum(int[] num) {
+		int len = num.length;
+		List<List<Integer>> result = new LinkedList<List<Integer>>();
+		if(len<3){
+			return result;
+		}
+		int target = 0;
+		bubble_sort(num);
+		boolean f1 = false;
+		for(int i=0; i<len-2; i++){
+			if(f1 && num[i]==num[i-1]){
+				continue;
+			}
+			f1 = true;
+			int j=i+1;
+			int k =len-1;
+			boolean f2=false,f3=false;
+			while(j!=k){
+				if(f2 && num[j] == num[j-1]){
+					j++;
+//					System.out.println(j);
+					continue;
+					
+				}				
+				if(f3 && num[k] == num[k+1]){
+					k--;
+//					System.out.println(k);
+					continue;
+					
+				}					
+				
+				if(num[i]+num[j]+num[k] == target){
+					List<Integer> ls = new LinkedList<Integer>();
+					ls.add(num[i]);
+					ls.add(num[j]);
+					ls.add(num[k]);
+					result.add(ls);
+				}
+				
+				if (num[i]+num[j]+num[k] > target) {
+					k--;
+					f3 = true;
+				}else {
+					j++;
+					f2 = true;
+				}				
+			}			
+		}
+		return result;
+	}
+	//二分查找
+	public int binarySearch2(int[] num, int start, int target){
+		int len = num.length;
+		if(len==0){
+			return -1;
+		}	
+		
+		int low = start;
+		int high = len-1;
+		
+//		int count=0;
+		while(low<=high){
+			int mid = (low+high)/2;
+			if(num[mid]==target){
+				return mid;
+			}else if(num[mid]<target){
+				low = mid + 1;
+			}else {
+				high = mid - 1;
+			}
+//			System.out.println(++count);
+		}
+		return -1;
+	}	
+	//二分查找
+	public int binarySearch(int[] num, int target){
+		int len = num.length;
+		if(len==0){
+			return -1;
+		}
+		
+		
+		int low = 0;
+		int high = len-1;
+		
+//		int count=0;
+		while(low<=high){
+			int mid = (low+high)/2;
+			if(num[mid]==target){
+				return mid;
+			}else if(num[mid]<target){
+				low = mid + 1;
+			}else {
+				high = mid - 1;
+			}
+//			System.out.println(++count);
+		}
+		return -1;
+	}
 	
 	
+	
+	public void quickSort(int[] data, int length, int start, int end){
+		if(start==end){
+			return;
+		}
+		int index = partition(data,length,start,end);
+		if(index>start){
+			quickSort(data, length, start, index-1);
+		}
+		if(index<end){
+			quickSort(data, length, index+1, end);
+		}
+	}
+	public int partition(int[] data, int length, int start, int end){
+		if(data==null||length<=0||start<0||end>=length){
+			return -1;
+		}
+		int index = (int)Math.random()*(end-start)+start;
+		int tmp = data[end];
+		data[end] = data[index];
+		data[index] = tmp;
+		int small = start-1;
+		for(index=start;index<end;index++){
+			if(data[index]<data[end]){
+				small++;
+				if(small!=index){
+					tmp = data[small];
+					data[small] = data[index];
+					data[index] = tmp; 
+				}
+			}
+		}
+		small++;
+		tmp = data[small];
+		data[small] = data[end];
+		data[end] = tmp;
+		return small;
+	}
+	
+	public void bubble_sort(int[] a){
+		//将数组a中排列成从小到大的有序的整数序列
+		for(int i=a.length-1;i>0;i--){
+			for(int j=0;j<i;j++){
+				if(a[j]>a[j+1]){
+//					System.out.println("change"+a[j]+"  "+a[j+1]);
+					int temp;
+					temp=a[j+1];
+					a[j+1]=a[j];
+					a[j]=temp;					
+				}
+			}
+		}
+	}
 }

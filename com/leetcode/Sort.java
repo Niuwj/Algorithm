@@ -45,7 +45,7 @@ public class Sort {
 	
 	public static void main(String[] args){
 		Sort sort = new Sort();
-		int[] data = {1,4,2,3,6,5,7,9,0,8};
+		int[] data = {1,4,2,3,6,5,7,9,0,0,8};
 		sort.quickSort(data, data.length, 0, data.length-1);
 		for(int i=0;i<data.length;i++){
 			System.out.println(data[i]);
