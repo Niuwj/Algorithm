@@ -587,4 +587,44 @@ You must do this in-place without altering the nodes' values.
         	p = p.next.next;
         }        
     }
+	
+	/*
+	 * Copy List with Random Pointer
+	 * A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null.
+
+Return a deep copy of the list.
+思路一：将A节点和复制的节点A'存入hashmap
+思路二：分三步：1.将复制的节点插入被复制节点之后，A->A'->B->B'->C->C'...；2.复制random指针；3.分拆两个链表
+	 */
+	public RandomListNode copyRandomList(RandomListNode head) {
+        if(head==null){
+        	return null;
+        }
+		RandomListNode p = head;
+        while(p!=null){
+        	RandomListNode newNode = new RandomListNode(p.label);
+        	newNode.next = p.next;
+        	p.next = newNode;
+        	p = newNode.next;
+        }
+		
+        p = head;
+        while(p!=null){
+        	if(p.random!=null){
+        		p.next.random = p.random.next;
+        	}
+        	p = p.next.next;
+        }
+        p = head;
+        RandomListNode result = head.next;
+        RandomListNode copy = result;
+        while(copy.next!=null){
+        	p.next = copy.next;
+        	copy.next = copy.next.next;
+        	p = p.next;
+        	copy = copy.next;
+        }
+        p.next = null;
+        return result;        
+    }
 }

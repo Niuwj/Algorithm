@@ -234,7 +234,6 @@ Your function should return length = 5, and A is now [1,1,2,2,3].
 					continue;
 					
 				}					
-				
 				if(num[i]+num[j]+num[k] == target){
 					List<Integer> ls = new LinkedList<Integer>();
 					ls.add(num[i]);
@@ -243,6 +242,7 @@ Your function should return length = 5, and A is now [1,1,2,2,3].
 					result.add(ls);
 				}
 				
+				//特别注意这个地方，不能是前边的if语句的else分支！！！！
 				if (num[i]+num[j]+num[k] > target) {
 					k--;
 					f3 = true;
