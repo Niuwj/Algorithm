@@ -358,4 +358,39 @@ Your function should return length = 5, and A is now [1,1,2,2,3].
 			}
 		}
 	}
+	/*
+	 * Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target. Return the sum of the three integers. You may assume that each input would have exactly one solution.
+
+    For example, given array S = {-1 2 1 -4}, and target = 1.
+
+    The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+	 */
+	public int threeSumClosest(int[] num, int target) {
+        int len = num.length;
+        if(len<3){
+        	return 0;
+        }
+        
+        int result = 0;
+        int min_gap = Integer.MAX_VALUE;
+        bubble_sort(num);
+        for(int i=0; i<len-2; i++){
+        	int j = i+1;
+        	int k = len-1;
+        	while(j<k){
+        		int sum = num[i]+num[j]+num[k];
+        		int gap = Math.abs(target-sum);
+        		if(gap < min_gap){
+        			result = sum;
+        			min_gap = gap;
+        		}
+        		if(sum<target){
+        			j++;
+        		}else {
+					k--;
+				}
+        	}
+        }
+        return result;
+    }
 }
