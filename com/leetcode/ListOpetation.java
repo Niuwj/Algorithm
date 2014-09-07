@@ -627,4 +627,40 @@ Return a deep copy of the list.
         p.next = null;
         return result;        
     }
+	
+	/*
+	 * Swap Nodes in Pairs
+	 * Given a linked list, swap every two adjacent nodes and return its head.
+
+For example,
+Given 1->2->3->4, you should return the list as 2->1->4->3.
+
+Your algorithm should use only constant space. You may not modify the values in the list, only nodes itself can be changed.
+	 */
+	public ListNode swapPairs(ListNode head) {
+        if(head==null || head.next==null){
+        	return head;
+        }        
+        //h保存头结点
+        ListNode h = new ListNode(0);        
+        ListNode pre = new ListNode(-1);
+        pre.next = head;
+        ListNode cur = head;
+        while(cur!=null && cur.next!=null){
+        	ListNode next = cur.next;        	
+        	//修改头指针
+        	if(pre.next == head){
+        	    h.next = next;
+        	}           	
+        	//swap
+        	pre.next = next;
+        	cur.next = next.next;
+        	next.next = cur;        	
+        	//指针后移
+        	pre = cur;
+        	cur = cur.next;
+        }        
+        return h.next;
+    }
+	
 }
