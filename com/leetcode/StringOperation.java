@@ -51,4 +51,31 @@ For the purpose of this problem, we define empty string as valid palindrome.
         return true;
     }
 	
+	/*
+	 * Write a function to find the longest common prefix string amongst an array of strings.
+	 */
+	public String longestCommonPrefix(String[] strs) {
+        if(strs==null || strs.length==0){
+        	return "";
+        }
+        //纵向比较
+        for(int i=0; i<strs[0].length();i++){
+        	Character c0 = strs[0].charAt(i);
+        	int j =1;
+        	while(j<strs.length){
+//        		System.out.println(strs[j].length());
+        		//注意可能strs[1]的长度小于strs[0]导致strs[j].charAt(i)越界
+        		if(strs[j].length()-1<i || !c0.equals(strs[j].charAt(i))){
+//        			System.out.println("i="+i);
+        			return strs[0].substring(0, i);
+        		}
+//        		System.out.println("j="+j);
+        		j++;        		
+        	}
+        }
+        return strs[0];
+    }
+	
+	
+	
 }
