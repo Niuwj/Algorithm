@@ -393,4 +393,53 @@ Your function should return length = 5, and A is now [1,1,2,2,3].
         }
         return result;
     }
+	
+	/*
+	 * Permutation Sequence排列
+	 * The set [1,2,3,…,n] contains a total of n! unique permutations.
+
+By listing and labeling all of the permutations in order,
+We get the following sequence (ie, for n = 3):
+
+1."123"
+2."132"
+3."213"
+4."231"
+5."312"
+6."321"
+Given n and k, return the kth permutation sequence.
+	 */
+	public String getPermutation(int n, int k) {
+        int[] nf = new int[n];
+        nf[0] = 1;
+        //n阶乘
+        for(int i=1; i<n; i++){
+        	nf[i]=nf[i-1]*(i+1);
+        }
+        char[] result = new char[n];
+        for(int i=0; i<n; i++){
+        	result[i] = (char)(i+'1');
+        }
+        k--;
+        for(int i=0; i<n; i++){
+        	int m = k%nf[n-i-1];
+        	int nk = k/nf[n-i-1];
+        	if(m==0 && nk==0){
+        		return new String(result);
+        	}else {
+				if(nk>0){
+					for(int j=i-1+nk; j>i-1; j--){
+						char tmp = result[j];
+						result[j] = result[j-1];
+						result[j-1] = tmp;
+					}
+					if(m==0){
+						return new String(result);
+					}
+				}
+				k = m;
+			}
+        }
+        return new String(result);
+    }
 }
