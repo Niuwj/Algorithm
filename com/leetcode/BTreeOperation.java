@@ -1,10 +1,8 @@
 package com.leetcode;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -134,4 +132,127 @@ public class BTreeOperation {
 		}
 		return result;
     }
+	
+	/*
+	 * Given a binary tree, return the zigzag level order traversal of its nodes' values. (ie, from left to right, then right to left for the next level and alternate between).
+
+For example:
+Given binary tree {3,9,20,#,#,15,7},
+    3
+   / \
+  9  20
+    /  \
+   15   7
+return its zigzag level order traversal as:
+[
+  [3],
+  [20,9],
+  [15,7]
+]
+
+OJ's Binary Tree Serialization:
+The serialization of a binary tree follows a level order traversal, where '#' signifies a path terminator where no node exists below.
+
+Here's an example:
+   1
+  / \
+ 2   3
+    /
+   4
+    \
+     5
+The above binary tree is serialized as "{1,2,3,#,#,4,#,#,5}".
+ 
+	 */
+	public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		if(root==null){
+			return result;
+		}
+		//一个队列寸当前层，一个队列存下一层
+		LinkedList<TreeNode> q1 = new LinkedList<TreeNode>();
+		LinkedList<TreeNode> q2 = new LinkedList<TreeNode>();
+		boolean l2r = false;//读取顺序，true为从左向右
+		q1.offer(root);
+		while(true){
+			//如果q1为空，即表示树读取完毕
+			if(q1.isEmpty()){
+				return result;
+			}
+			List<Integer> le = new LinkedList<Integer>();//save level
+			//扫当前层，将节点加入q1，子节点加入q2，值加入le链表
+			while(!q1.isEmpty()){
+				TreeNode tmp = q1.poll();
+				if(l2r){					
+					if(tmp.right!=null){
+						q2.addFirst(tmp.right);
+					}
+					if(tmp.left!=null){
+						q2.addFirst(tmp.left);
+					}				
+					
+				}else {					
+					if(tmp.left!=null){
+						q2.addFirst(tmp.left);
+					}
+					if(tmp.right!=null){
+						q2.addFirst(tmp.right);
+					}
+				}				
+				le.add(tmp.val);
+			}
+			//将当前层结果存入result
+			result.add(le);			
+			//交换q1,，q2
+			LinkedList<TreeNode> t = q1;
+			q1 = q2;
+			q2 = t;
+			l2r = !l2r;
+		}
+	}
+	
+	/*
+	 * Recover Binary Search Tree
+	 * Recover Binary Search Tree
+
+Two elements of a binary search tree (BST) are swapped by mistake.
+Recover the tree without changing its structure.
+Note:
+A solution using O(n) space is pretty straight forward. Could you devise a constant space solution?
+
+中序遍历找到两个指针及其前驱
+	 */
+	
+	TreeNode first;
+	TreeNode second;
+	TreeNode pre;
+	void inorder(TreeNode root){
+		if(root==null){
+			return;
+		}
+		inorder(root.left);
+		if(pre == null){
+			pre = root;
+		}else {
+			if(pre.val>root.val){
+				if(first == null){
+					first = pre;
+				}
+				second = root;
+			}
+			pre = root;
+		}
+		inorder(root.right);
+		
+	}
+	public void recoverTree(TreeNode root) {
+	     first = null;
+	     second = null;
+	     pre = null;
+	     inorder(root);
+	     int tmp = first.val;
+	     first.val = second.val;
+	     second.val = tmp;
+	}
+	
 }

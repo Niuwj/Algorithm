@@ -56,18 +56,19 @@ public class ALi {
 	      return max.length();
 	 } 
 	public static void main(String[] args){
-		TreeNode root = new TreeNode(3);
-		TreeNode a = new TreeNode(15);
-		TreeNode b = new TreeNode(2);
-		TreeNode c = new TreeNode(1);
-		TreeNode d = new TreeNode(3);
-		TreeNode e = new TreeNode(15);
-		
+		TreeNode root = new TreeNode(1);
+		TreeNode a = new TreeNode(2);
+		TreeNode b = new TreeNode(3);
+		TreeNode c = new TreeNode(4);
+		TreeNode d = new TreeNode(5);
+		TreeNode e = new TreeNode(6);
+		TreeNode f = new TreeNode(7);
 		root.left = a;
 		root.right = b;
 		a.left = c;
-		c.left = d;
-		b.right = e;
+		a.right = d;
+		b.left = e;
+		b.right = f;
 		System.out.println( "max"+maxMinus(root) );
 	}
 }
