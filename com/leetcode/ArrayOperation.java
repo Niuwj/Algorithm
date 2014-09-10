@@ -442,4 +442,40 @@ Given n and k, return the kth permutation sequence.
         }
         return new String(result);
     }
+	
+	/*顺时针旋转照片90°
+	 * You are given an n x n 2D matrix representing an image.
+
+Rotate the image by 90 degrees (clockwise).
+
+Follow up:
+Could you do this in-place?
+	 * 首先想到，纯模拟，从外到内一圈一圈的转，但这个方法太慢。
+	 * 好方法：首先沿着副对角线翻转一次，然后沿着水平中线翻转一次。
+	 * 或者，首先沿着水平中线翻转一次，然后沿着主对角线翻转一次。
+	 */
+	public void rotate(int[][] matrix) {
+        int n = matrix.length;
+        //int m = matrix[0].length;
+        
+        //首先沿着副对角线翻转一次
+        for(int i=0; i<n; i++){
+        	for(int j=0; j<n-i; j++){
+        		int tmp = matrix[i][j];
+        		matrix[i][j] = matrix[n-1-j][n-1-i];
+        		matrix[n-1-j][n-1-i] = tmp;
+        	}
+        }
+        
+        //沿着中线翻转一次
+        for(int i=0; i<n/2; i++){
+        	for(int j=0; j<n; j++){
+        		int tmp = matrix[i][j];
+        		matrix[i][j] = matrix[n-1-i][j];
+        		matrix[n-1-i][j] = tmp;
+        	}
+        }
+    }
+	
+	
 }

@@ -14,7 +14,7 @@ public class Main {
 //		int[] num = {-4,-6,-1,-2,-5,-4,2,4,0,2,1,1,1};
 //		int[] num={0,0,0,0};
 		ArrayOperation ao = new ArrayOperation();
-		System.out.println(ao.getPermutation(4, 19));
+		System.out.println(ao.getPermutation(4, 6));
 		
 //		ListNode result;
 //		ListNode l1 = new ListNode(2);
