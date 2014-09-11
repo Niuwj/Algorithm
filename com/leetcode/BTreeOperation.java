@@ -255,4 +255,132 @@ A solution using O(n) space is pretty straight forward. Could you devise a const
 	     second.val = tmp;
 	}
 	
+	
+	/*
+	 *same tree
+	 *Given two binary trees, write a function to check if they are equal or not.
+
+Two binary trees are considered equal if they are structurally identical and the nodes have the same value 
+
+递归比较
+	 */
+	public boolean isSameTree(TreeNode p, TreeNode q) {
+        
+        if(p!=null){
+        	if(q!=null){
+        		if(p.val==q.val){
+                	if(!isSameTree(p.left, q.left)){
+                		return false;
+                	}
+                	if(!isSameTree(p.right, q.right)){
+                		return false;
+                	}
+                	return true;
+                }else {
+        			return false;
+        		}
+        	}else {
+				return false;
+			}
+        }else {
+			if(q==null){
+				return true;
+			}else {
+				return false;
+			}
+		}
+        /*简略的代码
+        
+        //终止条件
+        if(p==null && q==null){
+        	return true;
+        }
+        //剪枝
+        if(p==null || q==null){
+        	return false;
+        }
+        //三方合并
+        return p.val==q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+        */
+    }
+	
+	/*
+	 * Symmetric Tree 对称树
+	 * Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+
+For example, this binary tree is symmetric:
+
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+But the following is not:
+    1
+   / \
+  2   2
+   \   \
+   3    3
+Note:
+Bonus points if you could solve it both recursively and iteratively.
+	 */
+	
+	public boolean isSymmetric(TreeNode root) {
+		if(root==null){
+			return true;
+		}
+		return isSymTree(root.left, root.right);
+    }
+	boolean isSymTree(TreeNode p, TreeNode q){
+		if(p!=null){
+        	if(q!=null){
+        		if(p.val==q.val){
+                	if(!isSameTree(p.left, q.right)){
+                		return false;
+                	}
+                	if(!isSameTree(p.right, q.left)){
+                		return false;
+                	}
+                	return true;
+                }else {
+        			return false;
+        		}
+        	}else {
+				return false;
+			}
+        }else {
+			if(q==null){
+				return true;
+			}else {
+				return false;
+			}
+		}
+	}
+	
+	//迭代版本
+	public boolean isSm(TreeNode p, TreeNode q){
+		LinkedList<TreeNode> st = new LinkedList<TreeNode>();
+		st.push(p);
+		st.push(q);
+		while(!st.isEmpty()){
+			TreeNode tp = st.pop();
+			TreeNode tq = st.pop();
+			if(tp==null && tq==null){
+				continue;
+			}
+			if(tp==null || tq==null){
+				return false;
+			}
+			if(tp.val != tq.val){
+				return false;
+			}
+			//修改压入顺序，可判断是same或者symmetric
+			st.push(tp.left);
+			st.push(tq.right);
+			st.push(tp.right);
+			st.push(tq.left);			
+		}
+		return true;
+	}
+	
 }
