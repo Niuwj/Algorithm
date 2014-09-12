@@ -72,21 +72,21 @@ public class Main {
 //		String[] strs = {"aa","a"};
 //		System.out.println(sOperation.longestCommonPrefix(strs));
 	
-		TreeNode root = new TreeNode(1);
-		TreeNode a = new TreeNode(2);
-		TreeNode b = new TreeNode(3);
-		TreeNode c = new TreeNode(4);
-		TreeNode d = new TreeNode(5);
-//		TreeNode e = new TreeNode(6);
-		TreeNode f = new TreeNode(7);
-		root.left = a;
-		root.right = b;
-		a.left = c;
-		a.right = d;
-//		b.left = e;
-		b.right = f;
-		BTreeOperation bt = new BTreeOperation();
-		System.out.println(bt.zigzagLevelOrder(root));
+//		TreeNode root = new TreeNode(1);
+//		TreeNode a = new TreeNode(2);
+//		TreeNode b = new TreeNode(3);
+//		TreeNode c = new TreeNode(4);
+//		TreeNode d = new TreeNode(5);
+////		TreeNode e = new TreeNode(6);
+//		TreeNode f = new TreeNode(7);
+//		root.left = a;
+//		root.right = b;
+//		a.left = c;
+//		a.right = d;
+////		b.left = e;
+//		b.right = f;
+//		BTreeOperation bt = new BTreeOperation();
+//		System.out.println(bt.zigzagLevelOrder(root));
 		
 	}
 }
