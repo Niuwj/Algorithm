@@ -1,7 +1,5 @@
 package com.leetcode;
 
-import sort.BubbleSort;
-
 
 
 public class Sort {
@@ -47,15 +45,30 @@ public class Sort {
 	
 	public static void main(String[] args){
 		Sort sort = new Sort();
-//		int[] data = {1,4,2,3,6,5,7,9,0,0,8};
+//		int[] data = {1,4,2,0,3,0,6,5,7,9,8};
+//		int[] data = {1,3,4,2,5};
+		int[] data = {1};
+//		int[] data = {0,0,1,2,3,4,5,6,7,8,9};
+		sort.bubbleSort(data);
+		sort.show(data);
+		//改进后的算法1并没有减少循环的次数
+		sort.bubbleSort1(data);
+		sort.show(data);
+		//改进后的算法2最好！！因为减少了i的循环次数
+		sort.bubbleSort2(data);
+		sort.show(data);
 //		sort.quickSort(data, data.length, 0, data.length-1);
-//		for(int i=0;i<data.length;i++){
-//			System.out.println(data[i]);
-//		}
-		char[] n = {'a','n','e','t','y','a','e','a'};
-		sort.countSort(n, 26);
+		
+		
+//		char[] n = {'a','n','e','t','y','a','e','a'};
+//		sort.countSort(n, 26);
 	}
-	
+	public void show(int[] data){
+		for(int i=0;i<data.length;i++){
+			System.out.print(data[i]+" ");
+		}
+		System.out.println();
+	}
 	
 	/*
 	 * 计数排序
@@ -100,9 +113,82 @@ public class Sort {
 		}
 	}
 	
-	//冒泡排序
-	public void BubbleSort(int[] num){
-		
-		
+	/*冒泡排序(交换顺序)
+	 * 基本思想：让较大的数往下沉，较小的数往上冒泡。
+	 * 自上而下对相邻的两个数进行比较，每当比较的两个数与排序要求相反时，就呼唤位置。
+	 */
+	public void bubbleSort(int[] num){
+		int len = num.length;
+		int i = len-1;
+		int count = 0;
+		while(i>0){
+			for(int j=0; j<i; j++){
+				if(num[j]>num[j+1]){
+					int tmp = num[j];
+					num[j] = num[j+1];
+					num[j+1] = tmp;
+				}
+				count++;
+			}
+			i--;
+		}
+		System.out.println("传统冒泡排序:"+count);
+	}
+	/*
+	 * 传统冒泡排序中每一趟排序操作只能找到一个最大值或最小值,
+	 * 我们考虑利用在每趟排序中进行正向和反向两遍冒泡的方法一次可以得到两个最终值(最大者和最小者) , 从而使排序趟数几乎减少了一半。
+	 */
+	public void bubbleSort1(int[] num){
+		int len = num.length;
+		int low = 0;
+		int high = len-1;
+		int count = 0;
+		while(low<high){
+			for(int j=low;j<high;j++){
+				if(num[j]>num[j+1]){
+					int tmp = num[j];
+					num[j] = num[j+1];
+					num[j+1] = tmp;
+				}
+				count++;
+			}
+			high--;
+			for(int k=high; k>low; k--){
+				if(num[k-1]>num[k]){
+					int tmp = num[k];
+					num[k] = num[k-1];
+					num[k-1] = tmp;
+				}
+				count++;
+			}
+			low++;
+		}
+		System.out.println("改进后的算法1："+count);
+	}
+	
+	
+	/*
+	 * 设置一标志性变量pos,用于记录每趟排序中最后一次进行交换的位置。
+	 * 由于pos位置之后的记录均已交换到位,故在进行下一趟排序时只要扫描到pos位置即可
+	 */
+	public void bubbleSort2(int[] num){
+		int len = num.length;
+		int count = 0;
+		int i = len-1;
+		while(i>0){
+			int pos = 0;
+			for(int j=0; j<i; j++){				
+				if(num[j]>num[j+1]){
+					pos = j;
+					int tmp = num[j];
+					num[j] = num[j+1];
+					num[j+1] = tmp;
+//					System.out.println(num[j]+" change "+num[j+1]);					
+				}
+				count++;
+			}
+			i = pos;
+		}
+		System.out.println("改进的冒泡排序2："+count);
 	}
 }
