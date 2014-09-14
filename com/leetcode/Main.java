@@ -87,9 +87,11 @@ public class Main {
 //		b.right = f;
 //		BTreeOperation bt = new BTreeOperation();
 //		System.out.println(bt.zigzagLevelOrder(root));
-		Search search = new Search();
-		int[] A = {1,1,1};
-		int[] result = search.searchRange(A, 1);
-		System.out.println(result[0]+" "+result[1]);
+//		Search search = new Search();
+//		int[] A = {1,1,1};
+//		int[] result = search.searchRange(A, 1);
+//		System.out.println(result[0]+" "+result[1]);
+		StackOperation sOperation = new StackOperation();
+		System.out.println(sOperation.isValid("(([]){})"));
 	}
 }
