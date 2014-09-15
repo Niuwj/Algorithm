@@ -2,6 +2,7 @@ package com.leetcode;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 public class ALi {
 
@@ -106,6 +107,8 @@ public class ALi {
 		String s1 = "abcba";
 		String s2 = "abcabcd";
 		System.out.println(getLCS(s1, s2));
+		Random random = new Random();
+		System.out.println(random.nextInt(6));
 		
 	}
 }
