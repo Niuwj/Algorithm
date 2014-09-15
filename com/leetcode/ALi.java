@@ -55,20 +55,57 @@ public class ALi {
 	      }
 	      return max.length();
 	 } 
+	
+	/*
+	 * 动态规划求最长公共子序列
+	 * 		  | 0			if i==0 or j==0
+	 * a[i][j]| a[i-1][j-1]+1		if s1[i]==s2[j],i!=0&&j!=0
+	 * 		  | max(a[i-1][j],a[i][j-1]		if s1[i]!=s2[j],i!=0&&j!=0
+	 */
+	public static int getLCS(String s1,String s2){
+		int len1 = s1.length();
+		int len2 = s2.length();
+		int[][] a = new int[len1][len2];
+		
+		//最有子结构，递归方程
+		for(int i=0; i<len1; i++){
+			for(int j=0; j<len2; j++){
+				Character c1 = s1.charAt(i);
+				if(c1.equals(s2.charAt(j))){
+					if(i==0||j==0){
+						a[i][j] = 1; 
+					}else {
+						a[i][j] = a[i-1][j-1]+1;
+					}					
+				}else {
+					if(i!=0 && j!=0){
+						a[i][j] = Math.max(a[i-1][j], a[i][j-1]); 
+					}
+				}
+			}
+		}
+		return a[len1-1][len2-1];
+	}
+	
+	
 	public static void main(String[] args){
-		TreeNode root = new TreeNode(1);
-		TreeNode a = new TreeNode(2);
-		TreeNode b = new TreeNode(3);
-		TreeNode c = new TreeNode(4);
-		TreeNode d = new TreeNode(5);
-		TreeNode e = new TreeNode(6);
-		TreeNode f = new TreeNode(7);
-		root.left = a;
-		root.right = b;
-		a.left = c;
-		a.right = d;
-		b.left = e;
-		b.right = f;
-		System.out.println( "max"+maxMinus(root) );
+//		TreeNode root = new TreeNode(1);
+//		TreeNode a = new TreeNode(2);
+//		TreeNode b = new TreeNode(3);
+//		TreeNode c = new TreeNode(4);
+//		TreeNode d = new TreeNode(5);
+//		TreeNode e = new TreeNode(6);
+//		TreeNode f = new TreeNode(7);
+//		root.left = a;
+//		root.right = b;
+//		a.left = c;
+//		a.right = d;
+//		b.left = e;
+//		b.right = f;
+//		System.out.println( "max"+maxMinus(root) );
+		String s1 = "abcba";
+		String s2 = "sjsabcbf";
+		System.out.println(getLCS(s1, s2));
+		
 	}
 }
