@@ -104,7 +104,7 @@ public class ALi {
 //		b.right = f;
 //		System.out.println( "max"+maxMinus(root) );
 		String s1 = "abcba";
-		String s2 = "sjsabcbf";
+		String s2 = "abcabcd";
 		System.out.println(getLCS(s1, s2));
 		
 	}
