@@ -3,6 +3,7 @@ package com.leetcode;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ALi {
 
@@ -88,6 +89,16 @@ public class ALi {
 		return a[len1-1][len2-1];
 	}
 	
+	/*函数重载，不可重载泛型
+	 泛型擦除
+	public void f(List<String> l){
+		
+	}
+	public void f(List<Integer> l){
+		
+	}
+	*/
+	
 	
 	public static void main(String[] args){
 //		TreeNode root = new TreeNode(1);
@@ -109,6 +120,7 @@ public class ALi {
 		System.out.println(getLCS(s1, s2));
 		Random random = new Random();
 		System.out.println(random.nextInt(6));
+		ConcurrentHashMap cmap = new ConcurrentHashMap<>();
 		
 	}
 }
