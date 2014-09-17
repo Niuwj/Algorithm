@@ -4,6 +4,83 @@ package com.leetcode;
 
 public class Sort {
 	
+	public void qSort(int[] data, int low, int high){
+		if(low<high){
+			int pivotloc = partition(data, low, high);
+			qSort(data, low, pivotloc-1);
+			qSort(data, pivotloc+1, high);
+		}
+	}
+	public void qSort2(int[] data, int low, int high){
+		if(low<high){
+			int pivotloc = partition2(data, low, high);
+			qSort2(data, low, pivotloc-1);
+			qSort2(data, pivotloc+1, high);
+		}
+	}
+	public int partition(int[] data, int low, int high){
+		int tmp = data[low];
+		int pivotkey = data[low];
+		while(low<high){
+			while(low<high && data[high]>=pivotkey){
+				high--;
+			}
+			data[low] = data[high]; 
+			while(low<high && data[low]<pivotkey){
+				low++;
+			}
+			data[high] = data[low];
+		}
+		data[low] = tmp;
+		return low;
+	}
+	/*
+	 * 改进！
+	 * 若初始记录序列按关键字有序或基本有序时，如果还拿第一个作为快排将退化为冒泡排序
+	 * 改进办法：
+	 */
+	public int partition2(int[] data, int low, int high){
+		int m = low;
+		int n = high;
+		int tmp = data[low];
+		int pivotkey = data[low];
+		int count = 0;
+		while(low<high){
+			while(low<high && data[high]>=pivotkey){
+				if(high<n){
+					if(data[high]>data[high+1]){
+						int t = data[high];
+						data[high] = data[high+1];
+						data[high+1] = t;
+						count++;
+					}
+				}
+				high--;
+			}
+			data[low] = data[high]; 
+			while(low<high && data[low]<pivotkey){
+				if(low>m){
+					if(data[low]<data[low-1]){
+						int t = data[low];
+						data[low] = data[low-1];
+						data[low-1] = t;
+						count++;
+					}
+				}
+				
+				low++;
+			}
+
+			data[high] = data[low];
+		}
+		data[low] = tmp;
+		return low;
+	}
+	
+	
+	
+	
+	
 	
 	public void quickSort(int[] data, int length, int start, int end){
 		if(start==end){
@@ -45,21 +122,23 @@ public class Sort {
 	
 	public static void main(String[] args){
 		Sort sort = new Sort();
-//		int[] data = {1,4,2,0,3,0,6,5,7,9,8};
+		int[] data = {1,4,2,0,3,0,6,5,7,9,8};
 //		int[] data = {1,3,4,2,5};
-		int[] data = {1};
+//		int[] data = {1};
 //		int[] data = {0,0,1,2,3,4,5,6,7,8,9};
-		sort.bubbleSort(data);
-		sort.show(data);
+//		sort.bubbleSort(data);
+//		sort.show(data);
 		//改进后的算法1并没有减少循环的次数
-		sort.bubbleSort1(data);
-		sort.show(data);
+//		sort.bubbleSort1(data);
+//		sort.show(data);
 		//改进后的算法2最好！！因为减少了i的循环次数
-		sort.bubbleSort2(data);
-		sort.show(data);
+//		sort.bubbleSort2(data);
+//		sort.show(data);
 //		sort.quickSort(data, data.length, 0, data.length-1);
-		
-		
+		sort.qSort(data, 0, data.length-1);
+		int[] data2 = {1,4,2,0,3,0,6,5,7,9,8};
+		sort.qSort2(data, 0, data.length-1);
+		sort.show(data);
 //		char[] n = {'a','n','e','t','y','a','e','a'};
 //		sort.countSort(n, 26);
 	}
