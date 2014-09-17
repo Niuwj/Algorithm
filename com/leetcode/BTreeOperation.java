@@ -1,11 +1,8 @@
 package com.leetcode;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -453,4 +450,120 @@ The maximum depth is the number of nodes along the longest path from the root no
 			return Math.max(maxDepth(root.left),maxDepth(root.right))+1;
 		 }
 	 }
+	 
+	 /*
+	  * Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.
+
+For example:
+Given the below binary tree and sum = 22,
+              5
+             / \
+            4   8
+           /   / \
+          11  13  4
+         /  \      \
+        7    2      1
+return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
+	  */
+	 public boolean hasPathSum(TreeNode root, int sum){
+		 if(root==null){
+			 return false;
+		 }
+		 
+		 if(root.left==null && root.right==null){
+			 return sum==root.val;
+		 }
+		 return hasPathSum(root.left, sum-root.val) || hasPathSum(root.right, sum-root.val);
+	 }
+	 
+	 /*
+	  * Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
+
+For example:
+Given the below binary tree and sum = 22,
+              5
+             / \
+            4   8
+           /   / \
+          11  13  4
+         /  \    / \
+        7    2  5   1
+return
+[
+   [5,4,11,2],
+   [5,8,4,5]
+]
+	  */
+	 
+	 /*public List<List<Integer>> result = new LinkedList<List<Integer>>();
+	 public LinkedList<Integer> path = new LinkedList<>();
+	 public List<List<Integer>> pathSum(TreeNode root, int sum) {
+		 path.clear();
+		 result.clear();
+		 if(root==null){
+			 return result;
+		 }	 
+		 
+		 findPath(root, sum);
+		 return result;
+	 }
+	 
+	 public boolean findPath(TreeNode root,int gap){
+		 if(root==null){
+			 return false;
+		 }
+		 if(root.left==null && root.right==null && gap==root.val){
+			 path.add(root.val);
+			 result.add(path);
+			 return true;
+		 }
+		 path.add(root.val);
+		 
+		 if(findPath(root.left, gap-root.val)==false && findPath(root.right, gap-root.val)==false){
+			 path.removeLast();
+			 return false;
+		 }else {
+			 ///path.removeLast();
+			 return true;
+		 }
+		 
+		
+	 }*/
+	 
+	 
+	 List<List<Integer>> result = new LinkedList<List<Integer>>();
+	 LinkedList<Integer> path = new LinkedList<>();
+	 public List<List<Integer>> pathSum(TreeNode root, int sum) {
+		 path.clear();
+		 result.clear();
+		 if(root==null){
+			 return result;
+		 }	 
+		 
+		 findPath(root, sum);
+		 return result;
+	 }
+	 
+	 public void findPath(TreeNode root,int gap){
+		 if(root.left==null && root.right==null && gap==root.val){
+			 path.add(root.val);
+			 //因为path是全局变量，所以要新建一个链表复制此时的path，将新建的lsit加入root的队列
+			 LinkedList<Integer> tmp = new LinkedList<>();
+			 for(int i=0;i<path.size();i++){
+				 tmp.add(path.get(i));
+			 }
+			 result.add(tmp);
+			 return;
+		 }
+		 path.add(root.val);
+		 if(root.left!=null){
+			 findPath(root.left, gap-root.val);
+			 path.removeLast();
+		 }
+		 if(root.right!=null){
+			 findPath(root.right, gap-root.val);
+			 path.removeLast();
+		 }
+	 }
+	 
 }

@@ -1,6 +1,5 @@
 package com.leetcode;
 
-import javax.swing.plaf.SliderUI;
 
 public class StringOperation {
 

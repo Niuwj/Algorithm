@@ -171,7 +171,7 @@ public class Sort {
 			System.out.print(A[i]+" ");
 		}
 		System.out.println();
-		//统计小雨某元素的个数
+		//统计小于某元素的个数
 		for(int i=1; i<26; i++){
 			A[i] += A[i-1];
 		}
