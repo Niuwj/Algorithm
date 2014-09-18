@@ -1,12 +1,30 @@
 package com.leetcode;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-
 //对数组的一些操作
 public class ArrayOperation {
+
+	/*
+	 * Remove Element
+	 * Given an array and a value, remove all instances of that value in place and return the new length.
+
+The order of elements can be changed. It doesn't matter what you leave beyond the new length.
+	 */
+	public int removeElement(int[] A, int elem) {
+        int len = A.length;
+        int index = 0;
+        for(int i=0; i<len; i++){
+        	if(A[i]!=elem){
+        		A[index] = A[i];
+        		index++;
+        	}
+        }
+        return index;
+    }
+	
+	
 	
 	
 //Given two sorted integer arrays A and B, merge B into A as one sorted array.
