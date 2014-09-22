@@ -1,4 +1,4 @@
-package com.leetcode;
+package yahoo;
 
 public class Yahoo {
 
@@ -14,9 +14,18 @@ public class Yahoo {
 //		show(A);
 //		int[] B = jiecheng(A);
 //		show(B);
-		int[][] m = {{1,2,3,4},{5,7,8,9},{6,10,11,12},{10,14,15,16}};
-		Yahoo y = new Yahoo();
-		System.out.println(y.searchMatrix(m, 15));
+//		int[][] m = {{1,2,3,4},{5,7,8,9},{6,10,11,12},{10,14,15,16}};
+//		Yahoo y = new Yahoo();
+//		System.out.println(y.searchMatrix(m, 15));
+		
+		A a = new B();
+		a.go();
+		
+		C c = new D();
+		System.out.println("--------------");
+		c = new C();
+		System.out.println("---------------");
+		D d = new D();
 	}
 	
 	//1.B[i]=A[1]*...A[i]*A[i+1]*...A[n]
