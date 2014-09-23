@@ -72,6 +72,7 @@ public class BTreeOperation {
     }
 	
 	//Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
+	//阿里二面问到广度优先遍历
 	//层次遍历
 	public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
