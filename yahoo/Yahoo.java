@@ -15,17 +15,19 @@ public class Yahoo {
 //		int[] B = jiecheng(A);
 //		show(B);
 //		int[][] m = {{1,2,3,4},{5,7,8,9},{6,10,11,12},{10,14,15,16}};
-//		Yahoo y = new Yahoo();
+		Yahoo y = new Yahoo();
 //		System.out.println(y.searchMatrix(m, 15));
 		
-		A a = new B();
-		a.go();
-		
-		C c = new D();
-		System.out.println("--------------");
-		c = new C();
-		System.out.println("---------------");
-		D d = new D();
+//		A a = new B();
+//		a.go();
+//		
+//		C c = new D();
+//		System.out.println("--------------");
+//		c = new C();
+//		System.out.println("---------------");
+//		D d = new D();
+		int[] a = {3,4,5,3,4,5,3,4,4,5,5};
+		System.out.println(y.twoInFour(a));
 	}
 	
 	//1.B[i]=A[1]*...A[i]*A[i+1]*...A[n]
@@ -126,18 +128,28 @@ public class Yahoo {
 	}
 	/*
 	 * 一个整数列，除了一个数字重复2次，所有其他数字都重复4次。O(n)时间O(1)空间找到那个只出现2次的。
-
-e.g.
-
-5, 6, 1123,5, 5, 6, 6, 7, 6, 7, 7, 1123, 5,7
-
- 输出 1123；
- 
- s
- 4k+2?!!!!!!!!!
+	 * e.g.
+	 * 5, 6, 1123,5, 5, 6, 6, 7, 6, 7, 7, 1123, 5,7
+	 *  输出 1123； 
+	 *  
+	 *  解法很巧妙：以二进制位统计，用四个数字表示统计结果
 	 */
-	public int twoExp(int[] a){
-		return 0;
+	public int twoInFour(int[] a){
+		//用t[i]记录传入的数（如32位）出现i次的位，例如：t[3]，值为1的比特位，说明该位1出现的次数模4后值为3（出现3k次），否则为0。
+		//4k+2即返回record[2]；4k+3即返回record[3]
+		int[] record = new int[4];
+		record[0] = 0B11111111111111111111111111111111;
+		record[1] = 0B00000000000000000000000000000000;
+		record[2] = 0B00000000000000000000000000000000;
+		record[3] = 0B00000000000000000000000000000000;
+		for(int i=0;i<a.length;i++){
+			int t = record[3];
+			record[3] = (record[3]& ~a[i]) | (record[2]&a[i]);
+			record[2] = (record[2]& ~a[i]) | (record[1]&a[i]);
+			record[1] = (record[1]& ~a[i]) | (record[0]&a[i]);
+			record[0] = (record[0]& ~a[i]) | (t&a[i]);
+		}
+		return record[2];
 	}
 	
 }
