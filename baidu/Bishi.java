@@ -4,7 +4,8 @@ public class Bishi {
 
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		int[] arr = {1,4,3,5,6,7,8};
+		System.out.println(LIS(arr));
 
 	}
 	
@@ -26,9 +27,23 @@ LIS[i] = max{1,LIS[k]+1}，其中，对于任意的k<=i-1，arr[i] > arr[k]，�
 方法二：排序+LCS
 用quicksort + LCS，这个思路还是很巧妙的，因为LIS是单调递增的性质，所以任意一个LIS一定跟排序后的序列有LCS，并且就是LIS本身。
 	 */
-	public int LIS(int[] arr){
+	
+	
+	public static int LIS(int[] arr){
+		int len = arr.length;
+		int[] dp = new int[len];
 		int max = 0;
-		
+		for(int i=0; i<len; i++){
+			dp[i] = 1;
+			for(int j=0; j<i; j++){
+				if(arr[i] > arr[j] && dp[i]<dp[j]+1){
+					dp[i] = dp[j] + 1;
+					if(dp[i] > max){
+						max = dp[i];
+					}
+				}
+			}
+		}
 		return max;
 	}
 	
