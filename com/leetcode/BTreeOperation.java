@@ -533,7 +533,7 @@ return
 	 
 	 
 	 List<List<Integer>> result = new LinkedList<List<Integer>>();
-	 LinkedList<Integer> path = new LinkedList<>();
+	 LinkedList<Integer> path = new LinkedList<Integer>();
 	 public List<List<Integer>> pathSum(TreeNode root, int sum) {
 		 path.clear();
 		 result.clear();
@@ -549,7 +549,7 @@ return
 		 if(root.left==null && root.right==null && gap==root.val){
 			 path.add(root.val);
 			 //因为path是全局变量，所以要新建一个链表复制此时的path，将新建的lsit加入root的队列
-			 LinkedList<Integer> tmp = new LinkedList<>();
+			 LinkedList<Integer> tmp = new LinkedList<Integer>();
 			 for(int i=0;i<path.size();i++){
 				 tmp.add(path.get(i));
 			 }
