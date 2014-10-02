@@ -120,7 +120,6 @@ public class ALi {
 		System.out.println(getLCS(s1, s2));
 		Random random = new Random();
 		System.out.println(random.nextInt(6));
-		ConcurrentHashMap cmap = new ConcurrentHashMap<>();
 		
 	}
 }
