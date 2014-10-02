@@ -5,6 +5,28 @@ import java.util.List;
 
 //对数组的一些操作
 public class ArrayOperation {
+
+	/*
+	 * climbing stairs
+	 * You are climbing a stair case. It takes n steps to reach to the top.
+
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+	斐波那契数列：f(n)=f(n-1)+f(n-2)
+	 */
+	public int climbStairs(int n) {
+        int pre = 0;
+        int cur = 1;
+        for(int i=1; i<=n; i++){
+        	int tmp = cur;
+        	cur = pre + cur;
+        	pre = tmp;
+        }
+        return cur;
+    }
+	
+	
+	
+	
 	/*
 	 * plus one
 	 * Given a non-negative number represented as an array of digits, plus one to the number.
