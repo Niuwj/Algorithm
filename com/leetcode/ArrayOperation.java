@@ -5,7 +5,45 @@ import java.util.List;
 
 //对数组的一些操作
 public class ArrayOperation {
+	/*
+	 * plus one
+	 * Given a non-negative number represented as an array of digits, plus one to the number.
 
+The digits are stored such that the most significant digit is at the head of the list.
+题目：
+给定一个十进制数，用数组表示每一位，要求返回加一后的结果
+思路：
+从数组尾部到头部处理，用一个overflow flag来判断是否溢出，如果溢出则需要新开一个array
+	 */
+	public int[] plusOne(int[] digits) {
+        int len = digits.length;
+        int overflow = 0;
+        int i = len-1;
+        while(i>=0){
+        	if(digits[i]+1>9){
+        		digits[i] = 0;
+        		overflow = 1;
+        		i--;
+        	}else {
+				digits[i]++;
+				return digits;
+			}
+        }
+        
+        //当前位数不够
+        if(overflow > 0){
+        	int[] newDigits = new int[len+1];
+        	System.arraycopy(digits, 0, newDigits, 1, len);
+        	newDigits[0] = 1;
+        	//newDigits[1] = 0;
+        	return newDigits;
+        }
+        return digits;
+    }
+	
+	
+	
+	
 	/*
 	 * Remove Element
 	 * Given an array and a value, remove all instances of that value in place and return the new length.
