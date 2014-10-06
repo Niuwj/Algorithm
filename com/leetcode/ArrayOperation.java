@@ -1,10 +1,106 @@
 package com.leetcode;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 //对数组的一些操作
 public class ArrayOperation {
+	
+	/*
+	 * gas station
+	 * 
+	 * 分析：
+	 * 我们模拟一下过程：
+
+a. 最开始，站点0是始发站，假设车开出站点p后，油箱空了，假设sum1 = diff[0] +diff[1] + ... + diff[p]，可知sum1 < 0；
+
+b. 根据上面的论述，我们将p+1作为始发站，开出q站后，油箱又空了，设sum2 = diff[p+1] +diff[p+2] + ... + diff[q]，可知sum2 < 0。
+
+c. 将q+1作为始发站，假设一直开到了未循环的最末站，油箱没见底儿，设sum3 = diff[q+1] +diff[q+2] + ... + diff[size-1]，可知sum3 >= 0。
+
+要想知道车能否开回 q 站，其实就是在sum3 的基础上，依次加上 diff[0] 到 diff[q]，看看sum3在这个过程中是否会小于0。但是我们之前已经知道 diff[0] 到 diff[p-1] 这段路，油箱能一直保持非负，因此我们只要算算sum3 + sum1是否 <0，就知道能不能开到 p+1站了。如果能从p+1站开出，只要算算sum3 + sum1 + sum2 是否 < 0，就知都能不能开回q站了。
+
+因为 sum1, sum2 都 < 0，因此如果 sum3 + sum1 + sum2 >=0 那么 sum3 + sum1 必然 >= 0，也就是说，只要sum3 + sum1 + sum2 >=0，车必然能开回q站。而sum3 + sum1 + sum2 其实就是 diff数组的总和 Total，遍历完所有元素已经算出来了。因此 Total 能否 >= 0，就是是否存在这样的站点的 充分必要条件。
+
+这样时间复杂度进一步从O(2n)降到了 O(n)。
+
+基于这个思路，可以写出更加简洁的代码：
+	 */	
+	public int canCompleteCircuit(int[] gas, int[] cost) {
+        int gs = gas.length;
+        //int cs = cost.length;
+        
+        //total判断全程，sum判断当前是否站点是否可以
+        int total = 0;
+        int sum = 0;
+        int start = 0;
+        for(int i=0; i<gs; i++){
+        	total += (gas[i] - cost[i]);
+        	if(sum<0){//发现油箱空了
+        		sum = gas[i]-cost[i];
+        		start = i;
+        	}else {
+				sum += (gas[i]-cost[i]);
+			}
+        }
+        return total<0?-1:start;
+    }
+	
+	
+	
+	
+	
+	
+	
+	/*
+	 * Longest Consecutive Sequence 
+	 * Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
+
+For example,
+Given [100, 4, 200, 1, 3, 2],
+The longest consecutive elements sequence is [1, 2, 3, 4]. Return its length: 4.
+
+Your algorithm should run in O(n) complexity.
+	 */
+	public int longestConsecutive(int[] num) {
+        int len = num.length;
+		 if(len==0){
+			 return 0;
+		 }
+		 int i;
+		 Map<Integer, Boolean> map = new HashMap<Integer, Boolean>();
+		 for(i=0; i<len; i++){
+			 map.put(num[i], false);
+		 }
+		 
+		 int longest = 0;
+		 i = 0; 
+		 while(i<len){			 
+			 int l = 1;			 
+			 map.remove(num[i]);
+			 int tmp = num[i]+1;
+			 while(map.containsKey(tmp)){				 
+				 map.remove(tmp);
+				 l++;
+				 tmp++;
+			 }
+			 tmp = num[i]-1;
+			 while(map.containsKey(tmp)){
+				 map.remove(tmp);
+				 l++;
+				 tmp--;
+			 }
+			 if(l>longest){
+				 longest = l;
+			 }
+			 i++;
+		 }
+		 return longest;
+    }
+	
+	
 	/*
 	 * Set Matrix Zeroes 
 	 * Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do it in place.
