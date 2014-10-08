@@ -21,16 +21,55 @@ public class ArrayOperation {
 Given an integer n, generate the nth sequence.
 
 Note: The sequence of integers will be represented as a string.
+
+注意看懂题目：这是个序列：
+n	序列
+1	1
+2	11
+3	21
+4	1211
+5	111221
+6	312211
+7	13112221
+8	1113213211
+
 	 */
 	public String countAndSay(int n) {
-        
+        if(n==1){
+        	return "1";
+        }
+		String str1 = "1";
+        String strn = "";
+        for(int i=1; i<n; i++){
+        	strn = cas(str1);
+        	str1 = strn;
+        }
+        return strn;
     }
+	public String cas(String str){
+		String str1="";
+		//第一个字母
+		char c = str.charAt(0);
+		//记录出现次数
+		int ck = 1;
+		for(int i=1; i<=str.length();i++){
+			if(i!=str.length()&&str.charAt(i)==c){
+				ck++;
+			}else {
+				//将次数转换成字母
+				char chn = (char)(ck+'0');
+				str1 = str1+chn+c;
+				if(i==str.length()){
+					break;
+				}
+				c = str.charAt(i);
+				ck = 1;
+			}
+		}
+		return str1;
+	}
 	
-	
-	
-	
-	
-	
+		
 	
 	/*
 	 * gas station
@@ -71,10 +110,6 @@ c. 将q+1作为始发站，假设一直开到了未循环的最末站，油箱�
         }
         return total<0?-1:start;
     }
-	
-	
-	
-	
 	
 	
 	
