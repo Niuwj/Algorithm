@@ -8,6 +8,7 @@ import java.util.Stack;
 
 public class BTreeOperation {
 
+	
 	/*
 	 * Binary Tree Maximum Path Sum 
 	 * Given a binary tree, find the maximum path sum.
@@ -25,6 +26,118 @@ Return 6.
 	public int maxPathSum(TreeNode root) {
         
     }
+	
+	/*
+	 * Flatten Binary Tree to Linked List
+	 * Given a binary tree, flatten it to a linked list in-place.
+
+For example,
+Given
+
+         1
+        / \
+       2   5
+      / \   \
+     3   4   6
+The flattened tree should look like:
+   1
+    \
+     2
+      \
+       3
+        \
+         4
+          \
+           5
+            \
+             6
+   
+Hints:
+If you notice carefully in the flattened tree, each node's right child points to the next node of a pre-order traversal.	
+ */
+	public void flatten(TreeNode root) {
+        
+    }
+	
+	
+	/*
+	 * Construct Binary Tree from Inorder and Postorder Traversal 
+	 * Given inorder and postorder traversal of a tree, construct the binary tree.
+
+Note:
+You may assume that duplicates do not exist in the tree.
+
+分析：
+1. Find the last node in the postorder vector, which is the root of the current tree.
+2. Find the position of root node in the inorder vector, which divide the inorder vector into 2 sub tree inorder vectors. Left part is the left sub-tree, right part is the right sub-tree.
+3. Do 1 and 2 for the right and left sub-tree, respectively.
+
+	 */
+	public TreeNode buildTreeInPost(int[] inorder, int[] postorder) {
+        int lin = inorder.length;
+        int lpo = postorder.length;
+        if(lpo==0){
+        	return null;
+        }else {
+			return partInPost(inorder, postorder, 0, lin-1, lpo-1);
+		}
+    }
+	
+	public TreeNode partInPost(int[] inorder, int[] postorder, int istart, int iend, int pend){
+		if(istart>iend){
+			return null;
+		}
+		TreeNode root = new TreeNode(postorder[pend]);
+		int mid = 0;
+		for(int i=istart;i<=iend;i++){
+			if(inorder[i]==root.val){
+				mid = i;
+				break;
+			}
+		}
+		root.right = partInPost(inorder, postorder, mid+1, iend, pend-1);
+		root.left = partInPost(inorder, postorder, istart, mid-1, pend-1-iend+mid);
+		return root;
+	}
+	
+	/*
+	 * Construct Binary Tree from Preorder and Inorder Traversal 
+	 * Given preorder and inorder traversal of a tree, construct the binary tree.
+
+Note:
+You may assume that duplicates do not exist in the tree.
+	 */
+	public TreeNode buildTreePreIn(int[] preorder, int[] inorder) {
+		int lin = inorder.length;
+        int lpre = preorder.length;
+        if(lpre==0){
+        	return null;
+        }else {
+			return partPreIn(preorder, inorder, 0, 0, lin-1);
+		}
+    }
+	
+	public TreeNode partPreIn(int[] preorder, int[] inorder, int pstart, int istart, int iend){
+		if(istart>iend){
+			return null;
+		}
+		int mid = 0;
+		TreeNode root = new TreeNode(preorder[pstart]);
+		for(int i=istart;i<=iend;i++){
+			if(inorder[i]==root.val){
+				mid = i;
+				break;
+			}
+		}
+		root.left = partPreIn(preorder, inorder, pstart+1, istart, mid-1);
+		root.right = partPreIn(preorder, inorder, pstart+mid-istart+1, mid+1, iend);
+		return root;		
+	}
+	
+	
+	
+	
+	
 	
 	
 	
