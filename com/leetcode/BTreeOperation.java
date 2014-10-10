@@ -55,8 +55,25 @@ The flattened tree should look like:
 Hints:
 If you notice carefully in the flattened tree, each node's right child points to the next node of a pre-order traversal.	
  */
-	public void flatten(TreeNode root) {
-        
+	public void flatten(TreeNode root) {        
+		if(root==null){
+			return;
+		}
+		flatten(root.left);
+		flatten(root.right);
+		
+		if(root.left==null){
+			return;
+		}		
+		
+		//左子树插入root和root.right之间
+		TreeNode p = root.left;
+		while(p.right!=null){
+			p= p.right;
+		}
+		p.right = root.right;		
+		root.right = root.left;
+		root.left = null;		
     }
 	
 	
