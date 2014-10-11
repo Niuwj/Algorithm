@@ -7,7 +7,43 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class BTreeOperation {
+	/*
+	 * Populating Next Right Pointers in Each Node 
+	 * Given a binary tree
 
+    struct TreeLinkNode {
+      TreeLinkNode *left;
+      TreeLinkNode *right;
+      TreeLinkNode *next;
+    }
+Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
+
+Initially, all next pointers are set to NULL.
+
+Note:
+
+You may only use constant extra space.
+You may assume that it is a perfect binary tree (ie, all leaves are at the same level, and every parent has two children).
+For example,
+Given the following perfect binary tree,
+         1
+       /  \
+      2    3
+     / \  / \
+    4  5  6  7
+After calling your function, the tree should look like:
+         1 -> NULL
+       /  \
+      2 -> 3 -> NULL
+     / \  / \
+    4->5->6->7 -> NULL
+	 */
+	public void connect(TreeLinkNode root) {
+        
+    }
+	
+	
+	
 	
 	/*
 	 * Binary Tree Maximum Path Sum 
@@ -151,17 +187,11 @@ You may assume that duplicates do not exist in the tree.
 		return root;		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//Given a binary tree, return the postorder traversal of its nodes' values.
-	//Note: Recursive solution is trivial, could you do it iteratively?
+		
+	/*
+	 * Given a binary tree, return the postorder traversal of its nodes' values.
+	 * Note: Recursive solution is trivial, could you do it iteratively?
+	 */	
 	
 	//后序遍历，迭代,Recursive solution
 	public List<Integer> postorderTraversal(TreeNode root) {
@@ -176,8 +206,11 @@ You may assume that duplicates do not exist in the tree.
         	result.add(root.val);        	
         }
     }
+	
+	/*
+	 * Given a binary tree, return the preorder traversal of its nodes' values
+	 */
 	//先序遍历二叉树，栈,iteratively
-	//Given a binary tree, return the preorder traversal of its nodes' values
 	public List<Integer> preorderTraversal(TreeNode root) {
 		List<Integer> result = new LinkedList<Integer>();
 		if(root==null){
@@ -200,7 +233,9 @@ You may assume that duplicates do not exist in the tree.
     }
 	
 	
-	//Given a binary tree, return the inorder traversal of its nodes' values.
+	/*
+	 * Given a binary tree, return the inorder traversal of its nodes' values.
+	 */
 	//中序遍历,非递归
 	public List<Integer> inorderTraversal(TreeNode root) {
 		List<Integer> result = new LinkedList<Integer>();
