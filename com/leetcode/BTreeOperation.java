@@ -100,9 +100,29 @@ Given the below binary tree,
      2   3
 Return 6.
 	 */
+	int max_sum = Integer.MIN_VALUE;
 	public int maxPathSum(TreeNode root) {
-        
+		dfsMPS(root);
+		return max_sum;
     }
+	
+	public int dfsMPS(TreeNode root){
+		if(root==null){
+			return 0;
+		}
+		int sum = root.val;
+		int l = dfsMPS(root.left);
+		int r = dfsMPS(root.right);
+		if(l>0){
+			sum += l;
+		}
+		if(r>0){
+			sum += r;
+		}
+		max_sum = Math.max(max_sum, sum);
+		return Math.max(l, r)>0 ? Math.max(l, r)+root.val : root.val;
+	}
+	
 	
 	/*
 	 * Flatten Binary Tree to Linked List
