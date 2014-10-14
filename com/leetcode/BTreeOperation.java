@@ -10,6 +10,7 @@ public class BTreeOperation {
 	
 	
 	
+	
 	/*
 	 * Sum Root to Leaf Numbers
 	 * Given a binary tree containing digits from 0-9 only, each root-to-leaf path could represent a number.
@@ -83,6 +84,36 @@ After calling your function, the tree should look like:
         
     }
 	
+	/*
+	 * 搜狐笔试题：二叉树叶子节点间路径最长大小：
+	 * 1.求左子树深度dl，右子树深度dr
+	 * 2.dl+dr
+	 * 3.如果根节点的右子树为空则转为求root.left的longestWay，
+	 */
+	public int longestWay(TreeNode root){
+		if(root==null){
+			return -1;
+		}
+		if(root.left==null){
+			return longestWay(root.right);
+		}
+		if(root.right == null){
+			return longestWay(root.left);
+		}
+		int dl = dfs(root.left);
+		int dr = dfs(root.right);
+		return dl+dr;
+	}
+	
+	int dfs(TreeNode root){
+		if(root==null){
+			return 0;
+		}
+		int l = dfs(root.left);
+		int r = dfs(root.right);
+		
+		return Math.max(l, r)+1;		
+	}
 	
 	
 	
