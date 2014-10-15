@@ -97,10 +97,9 @@ After calling your function, the tree should look like:
 		TreeNode tmp = root;
 		while(tmp!=null){
 			int lway = longestNodeWay(root.left);
-			if(lway==0){
-				
-			}
+//			System.out.println(lway);
 			int rway = longestNodeWay(root.right);
+//			System.out.println(rway);
 			if(max>lway && max>rway){
 				return max;
 			}
@@ -112,8 +111,8 @@ After calling your function, the tree should look like:
 				max = rway;
 				tmp = tmp.right;
 				continue;
-			}else {
-				max = lway;
+			}else {				
+				return lway;
 			}
 		}		
 		return max;

@@ -85,12 +85,10 @@ public class Main {
 ////		TreeNode e = new TreeNode(6);
 //		TreeNode f = new TreeNode(7);
 		root.left = b;
+		root.right = a;
 		a.left = c;
 		c.left = g;
 		g.left = h;
-		root.right = a;
-		
-//		a.left = c;
 		a.right = d;
 		d.right = e;
 		e.right = f;
