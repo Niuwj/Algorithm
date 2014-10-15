@@ -75,18 +75,25 @@ public class Main {
 	
 		TreeNode root = new TreeNode(1);
 		TreeNode a = new TreeNode(2);
-		TreeNode t = new TreeNode(1);
-		TreeNode b = new TreeNode(3);
-//		TreeNode c = new TreeNode(4);
-		TreeNode d = new TreeNode(5);
+		TreeNode b = new TreeNode(1);
+		TreeNode c = new TreeNode(3);
+		TreeNode d = new TreeNode(4);
+		TreeNode e = new TreeNode(5);
+		TreeNode f = new TreeNode(6);
+		TreeNode g = new TreeNode(7);
+		TreeNode h = new TreeNode(8);
 ////		TreeNode e = new TreeNode(6);
 //		TreeNode f = new TreeNode(7);
-		root.left = a;
-		a.left = t;
-		root.right = b;
+		root.left = b;
+		a.left = c;
+		c.left = g;
+		g.left = h;
+		root.right = a;
 		
 //		a.left = c;
 		a.right = d;
+		d.right = e;
+		e.right = f;
 ////		b.left = e;
 //		b.right = f;
 		BTreeOperation bt = new BTreeOperation();

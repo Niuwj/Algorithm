@@ -85,12 +85,41 @@ After calling your function, the tree should look like:
     }
 	
 	/*
-	 * 搜狐笔试题：二叉树叶子节点间路径最长大小：
+	 * 搜狐笔试题：二叉树叶子节点到叶子节点的最长路径大小：
 	 * 1.求左子树深度dl，右子树深度dr
 	 * 2.dl+dr
 	 * 3.如果根节点的右子树为空则转为求root.left的longestWay，
 	 */
-	public int longestWay(TreeNode root){
+	//遍历二叉树，计算每个节点的longestNodeWay与max相比
+	public int longestWay(TreeNode root)
+	{
+		int max = longestNodeWay(root);
+		TreeNode tmp = root;
+		while(tmp!=null){
+			int lway = longestNodeWay(root.left);
+			if(lway==0){
+				
+			}
+			int rway = longestNodeWay(root.right);
+			if(max>lway && max>rway){
+				return max;
+			}
+			if(lway>rway){
+				max = lway;
+				tmp = tmp.left;
+				continue;
+			}else if (lway<rway) {
+				max = rway;
+				tmp = tmp.right;
+				continue;
+			}else {
+				max = lway;
+			}
+		}		
+		return max;
+	}
+	
+	public int longestNodeWay(TreeNode root){
 		if(root==null){
 			return -1;
 		}
