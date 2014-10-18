@@ -8,6 +8,11 @@ import java.util.Map;
 //对数组的一些操作
 public class ArrayOperation {
 	
+	/*
+	 * 今天百度面试
+	 * 找出数字序列中只出现一次的数字，其他的数字可能出现两次，三次，四次。。未知
+	 */
+	
 	
 	
 	/*
