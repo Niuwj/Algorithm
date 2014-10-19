@@ -8,6 +8,28 @@ import java.util.Stack;
 
 public class BTreeOperation {
 	
+	/*
+	 * Validate Binary Search Tree 
+	 * Given a binary tree, determine if it is a valid binary search tree (BST).
+Assume a BST is defined as follows:
+The left subtree of a node contains only nodes with keys less than the node's key.
+The right subtree of a node contains only nodes with keys greater than the node's key.
+Both the left and right subtrees must also be binary search trees.
+confused what "{1,#,2,3}" means? > read more on how binary tree is serialized on OJ.
+	 */
+	public boolean isValidBST(TreeNode root){
+		if(root==null){
+			return true;
+		}
+		return isValidBST(root.left , Integer.MIN_VALUE, Integer.MAX_VALUE); 
+	}	
+	public boolean isValidBST(TreeNode root, int min, int max) {
+        if(root==null){
+        	return true;
+        }
+        return root.val>min && root.val<max && isValidBST(root.left, min, root.val) && isValidBST(root.right, root.val, max);
+        
+    }
 	
 	
 	
