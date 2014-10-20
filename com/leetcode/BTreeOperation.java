@@ -7,6 +7,111 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class BTreeOperation {
+			
+	/*
+	 * Populating Next Right Pointers in Each Node 
+	 * Given a binary tree
+
+    struct TreeLinkNode {
+      TreeLinkNode *left;
+      TreeLinkNode *right;
+      TreeLinkNode *next;
+    }
+Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
+
+Initially, all next pointers are set to NULL.
+
+Note:
+
+You may only use constant extra space.
+You may assume that it is a perfect binary tree (ie, all leaves are at the same level, and every parent has two children).
+For example,
+Given the following perfect binary tree,
+         1
+       /  \
+      2    3
+     / \  / \
+    4  5  6  7
+After calling your function, the tree should look like:
+         1 -> NULL
+       /  \
+      2 -> 3 -> NULL
+     / \  / \
+    4->5->6->7 -> NULL
+	 */
+	
+	
+	/*
+	 * Unique Binary Search Trees II 
+	 * Given n, generate all structurally unique BST's (binary search trees) that store values 1...n.
+
+For example,
+Given n = 3, your program should return all 5 unique BST's shown below.
+
+   1         3     3      2      1
+    \       /     /      / \      \
+     3     2     1      1   3      2
+    /     /       \                 \
+   2     1         2                 3
+	 * 
+	 */
+	public List<TreeNode> generateTrees(int n) {
+        
+    }
+	
+	
+	
+	
+	/*
+	 * Unique Binary Search Trees
+	 * Given n, how many structurally unique BST's (binary search trees) that store values 1...n?
+
+For example,
+Given n = 3, there are a total of 5 unique BST's.
+
+   1         3     3      2      1
+    \       /     /      / \      \
+     3     2     1      1   3      2
+    /     /       \                 \
+   2     1         2                 3
+
+当数组为 1; 2; 3; :::; n 时，基于以下原则的构建的 BST 树具有唯一性：以 i 为根节点的树，其左
+子树由 [1, i-1] 构成，其右子树由 [i+1, n] 构成。
+定义 f (i) 为以 [1; i] 能产生的 Unique Binary Search Tree 的数目，则
+如果数组为空，毫无疑问，只有一种 BST，即空树，f (0) = 1。
+如果数组仅有一个元素 1，只有一种 BST，单个节点，f (1) = 1。
+如果数组有两个元素 1,2，那么有如下两种可能
+1 2
+\ /
+2 1
+f (2) = f (0) * f (1) ，1 为根的情况
++ f (1) * f (0) ，2 为根的情况
+再看一看 3 个元素的数组，可以发现 BST 的取值方式如下：
+f (3) = f (0) * f (2) ，1 为根的情况
++ f (1) * f (1) ，2 为根的情况
++ f (2) * f (0) ，3 为根的情况
+所以，由此观察，可以得出 f 的递推公式为
+f (i) = ∑f (k - 1) * f (i - k)
+至此，问题划归为一维动态规划。  
+   
+	 */
+	public int numTrees(int n) {
+		int[] dm = new int[n+1];
+		dm[0] = 1;
+		dm[1] = 1;
+		for(int i=2; i<=n; i++){
+			for(int k=1; k<=i; k++){
+				dm[i] += dm[k-1]*dm[i-k];
+			}
+		}
+		return dm[n];
+	}	
+	
+	
+	
+	
+	
+	
 	
 	/*
 	 * Validate Binary Search Tree 
@@ -71,37 +176,7 @@ Return the sum = 12 + 13 = 25.
 	
 	
 	
-	/*
-	 * Populating Next Right Pointers in Each Node 
-	 * Given a binary tree
-
-    struct TreeLinkNode {
-      TreeLinkNode *left;
-      TreeLinkNode *right;
-      TreeLinkNode *next;
-    }
-Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
-
-Initially, all next pointers are set to NULL.
-
-Note:
-
-You may only use constant extra space.
-You may assume that it is a perfect binary tree (ie, all leaves are at the same level, and every parent has two children).
-For example,
-Given the following perfect binary tree,
-         1
-       /  \
-      2    3
-     / \  / \
-    4  5  6  7
-After calling your function, the tree should look like:
-         1 -> NULL
-       /  \
-      2 -> 3 -> NULL
-     / \  / \
-    4->5->6->7 -> NULL
-	 */
+	
 	public void connect(TreeLinkNode root) {
         
     }
