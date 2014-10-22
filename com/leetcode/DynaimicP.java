@@ -3,6 +3,12 @@ package com.leetcode;
 public class DynaimicP {
 	
 	/*
+	 * Minimum Path Sum
+	 * Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right which minimizes the sum of all numbers along its path.
+	 */
+	
+	
+	/*
 	 * Interleaving String 
 	 * Given s1, s2, s3, find whether s3 is formed by the interleaving of s1 and s2.
 

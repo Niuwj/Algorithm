@@ -9,9 +9,61 @@ import java.util.Map;
 public class ArrayOperation {
 	
 	/*
+	 * 生成如下数组(58笔试题)
+	 * 1  2  3  4  5
+	 * 16 17 18 19 6
+	 * 15 24 25 20 7
+	 * 14 23 22 21 8
+	 * 13 12 11 10 9
+	 */
+	int[][] generate(int n){
+		int[][] a = new int[n][n];
+		int k = 1;
+		for(int i=n; i>=1;i--){
+			//a[n-i][n-i]~a[n-i][i-1]
+			for(int j=n-i;j<i;j++){
+				a[n-i][j] = k++;
+			}
+			//a[n-i+1][i-1]~a[i-1][i-1]
+			for(int j=n-i+1;j<i;j++){
+				a[j][i-1] = k++;
+			}
+			//a[i-1][i-2]~a[i-1][n-i]
+			for(int j=i-2;j>=n-i;j--){
+				a[i-1][j] = k++;
+			}
+			//a[i-2][n-i]~a[n-i+1][n-i]
+			for(int j=i-2;j>n-i;j--){
+				a[j][n-i] = k++;
+			}
+		}
+		return a;
+	}
+	void showArray(int[][] a){
+		int m = a.length;
+		int n = a[0].length;
+		for(int i=0;i<m;i++){
+			for(int j=0;j<n;j++){
+				System.out.print(a[i][j]+"\t");
+			}
+			System.out.println();
+		}
+	}
+	
+	
+	
+	/*
 	 * 今天百度面试
 	 * 找出数字序列中只出现一次的数字，其他的数字可能出现两次，三次，四次。。未知
+	 * 面试官不让用hashmap，而之前的位运算的singleone的方法也不行，因为k不确定。。。
+	 * 该用什么方法呢？
 	 */
+	
+	
+	
+	
+	
+	
 	
 	
 	
