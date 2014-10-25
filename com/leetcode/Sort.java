@@ -4,6 +4,44 @@ package com.leetcode;
 
 public class Sort {
 	
+	/*
+	 * First Missing Positive 
+	 * Given an unsorted integer array, find the first missing positive integer.
+
+For example,
+Given [1,2,0] return 3,
+and [3,4,-1,1] return 2.
+
+Your algorithm should run in O(n) time and uses constant space.
+
+A[i] = A[A[i]-1]
+如果不相等，则交换
+	 */
+	public int firstMissingPositive(int[] A) {
+        int len = A.length;
+        //1、桶排序
+        bucketSort(A, len);
+        for(int i=0; i<len; i++){
+        	if(A[i]!=i+1){
+        		return i+1;
+        	}
+        }
+        return len+1;        
+    }
+	public void bucketSort(int[] A, int n){
+		int i = 0;
+		while(i<n){
+        	if(A[i]>0 && A[i]!= i+1 && A[i]-1<n && A[A[i]-1]!= A[i]){
+        		int tmp = A[A[i]-1];
+        		A[A[i]-1] = A[i];
+        		A[i] = tmp;
+        	}else {
+				i++;
+			}
+        }
+	}
+	
+	
 	public void qSort(int[] data, int low, int high){
 		if(low<high){
 			int pivotloc = partition(data, low, high);
