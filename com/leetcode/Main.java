@@ -14,7 +14,7 @@ public class Main {
 //		int[] num = {-4,-6,-1,-2,-5,-4,2,4,0,2,1,1,1};
 //		int[] num={0,0,0,0};
 		ArrayOperation ao = new ArrayOperation();
-		ao.showArray(ao.generate(5));
+//		ao.showArray(ao.generate(5));
 //		System.out.println(ao.countAndSay(10));
 //		System.out.println(ao.getPermutation(4, 6));
 		
@@ -105,5 +105,9 @@ public class Main {
 //		System.out.println(result[0]+" "+result[1]);
 //		StackOperation sOperation = new StackOperation();
 //		System.out.println(sOperation.isValid("(([]){})"));
+		Sort sort = new Sort();
+		int[] A = {2,1};
+		sort.bucketSort(A, 2);
+		ao.showArray(A);
 	}
 }

@@ -49,7 +49,13 @@ public class ArrayOperation {
 			System.out.println();
 		}
 	}
-	
+	void showArray(int[] a){
+		int m = a.length;
+		for(int i=0;i<m;i++){
+			System.out.print(a[i]+"\t");
+		}
+		System.out.println();
+	}
 	
 	
 	/*
