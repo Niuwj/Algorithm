@@ -39,6 +39,11 @@ After calling your function, the tree should look like:
      / \  / \
     4->5->6->7 -> NULL
 	 */
+	public void connect(TreeLinkNode root) {
+        
+    }
+	
+	
 	
 	
 	/*
@@ -56,8 +61,31 @@ Given n = 3, your program should return all 5 unique BST's shown below.
 	 * 
 	 */
 	public List<TreeNode> generateTrees(int n) {
-        
+        LinkedList<TreeNode> res = new LinkedList<>();
+        dfs(1, n, res);
+        return res;
     }
+	void dfs(int st, int ed, LinkedList<TreeNode> resList){
+		if(st>ed){
+			resList.push(null);
+		}else {
+			for(int i=st; i<=ed; i++){
+				LinkedList<TreeNode> lefts = new LinkedList<>();
+				dfs(st, i-1, lefts);
+				LinkedList<TreeNode> rights = new LinkedList<>();
+				dfs(i+1, ed, rights);
+				
+				for(int li=0; li<lefts.size();li++){
+					for(int ri=0; ri<rights.size(); ri++){
+						TreeNode node = new TreeNode(i);
+						node.left = lefts.get(li);
+						node.right = rights.get(ri);
+						resList.push(node);
+					}
+				}
+			}
+		}
+	}
 	
 	
 	
