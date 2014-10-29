@@ -1,16 +1,7 @@
 package com.leetcode;
 
 public class DynaimicP {
-	
-	/*
-	 * Minimum Path Sum
-	 * Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right which minimizes the sum of all numbers along its path.
-	 */
-	public int minPathSum(int[][] grid) {
-        
-    }
-	
-	
+
 	/*
 	 * Triangle
 	 * Given a triangle, find the minimum path sum from top to bottom. Each step you may move to adjacent numbers on the row below.
@@ -32,6 +23,35 @@ Bonus point if you are able to do this using only O(n) extra space, where n is t
     }
 	
 	
+	
+	/*
+	 * Minimum Path Sum
+	 * Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right which minimizes the sum of all numbers along its path.
+	 *Note: You can only move either down or right at any point in time.
+	 * 设状态为 f[i][j] ，表示从起点 (0 , 0) 到达 ( i, j ) 的最小路径和，则状态转移方程为：
+f[i][j]=min(f[i-1][j], f[i][j-1])+grid[i][j]
+	 */
+	public int minPathSum(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        if(m==0 || n==0){
+        	return 0;
+        }
+        int[][] dm = new int[m][n];
+        dm[0][0] = grid[0][0];
+        for(int i=1;i<m;i++){
+        	dm[i][0] = dm[i-1][0]+grid[i][0];
+        }
+        for(int i=1;i<n;i++){
+        	dm[0][i] = dm[0][i-1]+grid[0][i];
+        }
+        for(int i=1;i<m;i++){
+        	for(int j=1;j<n;j++){
+        		dm[i][j] = Math.min(dm[i-1][j], dm[i][j-1]) + grid[i][j];
+        	}
+        }
+        return dm[m-1][n-1];
+    }
 	
 	
 	/*
