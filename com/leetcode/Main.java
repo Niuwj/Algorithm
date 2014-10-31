@@ -106,8 +106,9 @@ public class Main {
 //		StackOperation sOperation = new StackOperation();
 //		System.out.println(sOperation.isValid("(([]){})"));
 		Sort sort = new Sort();
-		int[] A = {2,1};
-		sort.bucketSort(A, 2);
+		int[] A = {0};
+		sort.sortColors(A);
+//		sort.bucketSort(A, 2);
 		ao.showArray(A);
 	}
 }
