@@ -7,6 +7,52 @@ import java.util.Map;
 
 //对数组的一些操作
 public class ArrayOperation {
+	/*
+	 * Add Binary
+	 * Given two binary strings, return their sum (also a binary string).
+For example,
+a = "11"
+b = "1"
+Return "100".
+	 */
+	public String addBinary(String a, String b) {
+        if(a==null || a.length()==0){
+        	return b;
+        }
+        if(b==null || b.length()==0){
+        	return a;
+        }
+        
+        int la = a.length();
+        int lb = b.length();        
+        int carry = 0;
+        StringBuffer result = new StringBuffer();
+        int n = Math.max(la, lb);
+        int d = Math.abs(la-lb);
+        int i = n-1;
+        while(i>=0){
+        	int ca,cb;
+        	if(la < n){
+        		ca = i-d>=0 ? a.charAt(i-d)-'0' : 0;
+        		cb = b.charAt(i)-'0';
+        	}else {
+        		ca = a.charAt(i)-'0';
+        		cb = i-d>=0 ? b.charAt(i-d)-'0' : 0;
+			}       	
+        	Integer val = (ca + cb + carry)%2;
+        	System.out.println("ca:" + ca + "cb" + cb +" val" + val);
+        	carry = (ca + cb + carry)/2;
+        	result = result.insert(0, val.toString());
+        	System.out.println(i + "  " + result);
+        	i--;
+        }
+        if(carry == 1){
+        	result = result.insert(0, '1');
+        }
+        return result.toString();
+        
+    }
+	
 	
 	/*
 	 * 生成如下数组(58笔试题)
